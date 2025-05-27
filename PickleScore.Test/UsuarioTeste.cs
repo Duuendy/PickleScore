@@ -49,5 +49,34 @@ namespace PickleScore.Test
 
             
         }
+
+        [TestMethod]
+        public void TESTE_CARREGAR_USUARIO()
+        {
+            var usuarioDAL = new PickleScore.Web.DAL.UsuarioDAL();
+            var usuario = usuarioDAL.CarregarUsuario(1);
+            Assert.IsNotNull(usuario, "Usuário não encontrado.");
+            Assert.AreEqual(1, usuario.Id, "O ID do usuário não corresponde ao esperado.");
+            Assert.IsNotNull(usuario.Nome, "O nome do usuário não foi carregado corretamente.");
+            Assert.IsNotNull(usuario.Senha, "A senha do usuário não foi carregada corretamente.");
+            Assert.IsNotNull(usuario.Cpf, "O CPF do usuário não foi carregado corretamente.");
+            Assert.IsNotNull(usuario.Email, "O email do usuário não foi carregado corretamente.");
+            Assert.IsNotNull(usuario.Nascimento, "A data de nascimento do usuário não foi carregada corretamente.");
+            Assert.IsTrue(usuario.PerfilId > 0, "O perfil do usuário não foi carregado corretamente.");
+        }
+
+        [TestMethod]
+        public void TESTE_ATUALIZAR_USUARIO() 
+        {
+            var usuarioDAL = new PickleScore.Web.DAL.UsuarioDAL();
+            var usuario = usuarioDAL.CarregarUsuario(3);
+            Assert.IsNotNull(usuario, "Usuário não encontrado.");
+            usuario.Nome = "Hugo Calderano";
+            usuarioDAL.AtualizarUsuario(usuario);
+            var usuarioAtualizado = usuarioDAL.CarregarUsuario(3);
+            Assert.IsNotNull(usuarioAtualizado, "Usuário atualizado não encontrado.");
+            Assert.AreEqual("Hugo Calderano", usuarioAtualizado.Nome, "O nome do usuário atualizado não corresponde ao esperado.");
+
+        }
     }
 }
