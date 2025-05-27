@@ -1,0 +1,10 @@
+﻿# Ignorar pastas temporárias e arquivos locais do Visual Studio
+.vs/
+*.user
+*.suo
+.vscode/
+bin/
+obj/
+packages/
+*.log
+*.cache
