@@ -123,6 +123,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CampeonatoTeste.cs" />
+    <Compile Include="CategoriaTeste.cs" />
+    <Compile Include="FaixaEtariaTeste.cs" />
+    <Compile Include="InscricaoTeste.cs" />
+    <Compile Include="NivelTeste.cs" />
     <Compile Include="PerfilTeste.cs" />
     <Compile Include="UsuarioTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

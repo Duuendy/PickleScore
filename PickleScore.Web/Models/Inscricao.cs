@@ -17,8 +17,7 @@ namespace PickleScore.Web.Models
         public int FaixaEtariaId { get; set; }
         public int Valor { get; set; } // Valor da inscrição
         public string FormaPagamento { get; set; } // "Cartão de Crédito", "Boleto", "Pix"
-        public DateTime DataInicio { get; set; } // Data de início do campeonato
-        public DateTime DataFim { get; set; } // Data de fim do campeonato
+        public DateTime DataInscricao { get; set; } // Data de início do campeonato
         public DateTime DataInsercao { get; set; }
         public DateTime DataAlteracao { get; set; }
     }

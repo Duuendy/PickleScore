@@ -30,16 +30,17 @@ namespace PickleScore.Web.DAL
                                         UsuarioId, UsuarioParceiroId,
                                         CampeonatoId, CategoriaId, NivelId, FaixaEtariaId,
                                         Valor, FormaPagamento,
-                                        DataInicio, DataFim,
+                                        DataInscricao, 
                                         DataInsercao, DataAlteracao) 
                                     VALUES (
                                         @UsuarioId, @UsuarioParceiroId,
                                         @CampeonatoId, @CategoriaId, @NivelId, @FaixaEtariaId,
                                         @Valor, @FormaPagamento,
-                                        @DataInicio, @DataFim,
+                                        @DataInscricao,
                                         @DataInsercao, @DataAlteracao)";
                     inscricao.DataInsercao = DateTime.Now;
                     inscricao.DataAlteracao = DateTime.Now;
+                    inscricao.Id = connection.QuerySingle<int>("SELECT LAST_INSERT_ID();");
                     connection.Execute(query, inscricao);
                 }
                 else
@@ -72,8 +73,7 @@ namespace PickleScore.Web.DAL
                                     FaixaEtariaId = @FaixaEtariaId,
                                     Valor = @Valor,
                                     FormaPagamento = @FormaPagamento,
-                                    DataInicio = @DataInicio,
-                                    DataFim = @DataFim,
+                                    DataInscricao = @DataInscricao,
                                     DataAlteracao = @DataAlteracao 
                                 WHERE Id = @Id";
                 inscricao.DataAlteracao = DateTime.Now;
