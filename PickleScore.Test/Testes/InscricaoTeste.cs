@@ -16,7 +16,7 @@ namespace PickleScore.Test
             var nivelId = 1; // ID do nível do usuário
             var faixaEtariaId = 1; // ID da faixa etária do usuário
             var valor = 100; // Valor da inscrição
-            var formaPagamento = "Cartão de Crédito"; // Forma de pagamento
+            var formaPagamentoId = 1; // Forma de pagamento
             var DataInscricao = DateTime.Now;
             var dataInsercao = DateTime.Now;
             var dataAlteracao = DateTime.Now;
@@ -31,7 +31,7 @@ namespace PickleScore.Test
                 NivelId = nivelId,
                 FaixaEtariaId = faixaEtariaId,
                 Valor = valor,
-                FormaPagamento = formaPagamento,
+                FormaPagamentoId = formaPagamentoId,
                 DataInscricao = DataInscricao,
                 DataInsercao = dataInsercao,
                 DataAlteracao = dataAlteracao

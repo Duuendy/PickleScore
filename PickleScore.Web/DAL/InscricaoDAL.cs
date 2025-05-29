@@ -29,13 +29,13 @@ namespace PickleScore.Web.DAL
                     string query = @"INSERT INTO inscricao (
                                         UsuarioId, UsuarioParceiroId,
                                         CampeonatoId, CategoriaId, NivelId, FaixaEtariaId,
-                                        Valor, FormaPagamento,
+                                        Valor, FormaPagamentoId,
                                         DataInscricao, 
                                         DataInsercao, DataAlteracao) 
                                     VALUES (
                                         @UsuarioId, @UsuarioParceiroId,
                                         @CampeonatoId, @CategoriaId, @NivelId, @FaixaEtariaId,
-                                        @Valor, @FormaPagamento,
+                                        @Valor, @FormaPagamentoId,
                                         @DataInscricao,
                                         @DataInsercao, @DataAlteracao)";
                     inscricao.DataInsercao = DateTime.Now;
