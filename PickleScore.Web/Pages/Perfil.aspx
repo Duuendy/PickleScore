@@ -6,9 +6,9 @@
 
     <asp:Label ID="lblNome" runat="server" Text="Nome do Perfil:"></asp:Label>
     <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px" />
-    <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary"/>
-    <%--<asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" CssClass="btn btn-primary"/>--%>
-    <asp:Button ID="btnExcluir" runat="server" Text="Excluir" OnClick="btnExcluir_Click" CssClass="btn btn-primary"/>
+    <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" CssClass="btn btn-primary" />
+    <asp:Label ID="lblMensagem" runat="server" Text=""></asp:Label>
 
     <hr />
 
@@ -16,7 +16,7 @@
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>
-                    <asp:CheckBox ID="chkSelcionado" runat="server" />
+                    <asp:CheckBox ID="chkSelcionado" runat="server"/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="Nome" HeaderText="Nome" />
@@ -24,4 +24,20 @@
         </Columns>
     </asp:GridView>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (window.sucessoCadastro) {
+                alert("Perfil cadastrado com sucesso!!")
+            }
+
+            $('#<%= btnSalvar.ClientID %>').click(function () {
+                if (nome.trim() === "") {
+                    alert("O campo Nome do Perfil é obrigatório.");
+                    return false;
+                }
+            });
+        });
+
+
+    </script>
 </asp:Content>

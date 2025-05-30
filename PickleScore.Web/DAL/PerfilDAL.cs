@@ -8,6 +8,9 @@ using MySql.Data.MySqlClient;
 using Dapper;
 using PickleScore.Web.Models;
 using System.ComponentModel;
+using System.Drawing;
+using System.Web.UI.WebControls;
+using System.Web.DynamicData;
 
 namespace PickleScore.Web.DAL
 {
@@ -26,8 +29,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (perfil.Id == 0)
                 {
-                    string query = @"INSERT INTO perfil (Nome, DataInsercao, DataAlteracao) 
-                                VALUES (@Nome, @DataInsercao, @DataAlteracao)";
+                    string query = @"INSERT INTO perfil (Nome, DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
+                                VALUES (@Nome, @DataInsercao, @UsuarioInsecao, @DataAlteracao, UsuarioAlteracao)";
 
                     perfil.DataInsercao = DateTime.Now;
                     perfil.DataAlteracao = DateTime.Now;
@@ -58,7 +61,8 @@ namespace PickleScore.Web.DAL
                 perfil.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE perfil 
                                 SET Nome = @Nome, 
-                                DataAlteracao = @DataAlteracao 
+                                DataAlteracao = @DataAlteracao,
+                                UsuarioAlteracao = @UsuarioAlteracao        
                                 WHERE Id = @Id";
                 perfil.DataAlteracao = DateTime.Now;
                 connection.Execute(query, perfil);
@@ -80,6 +84,19 @@ namespace PickleScore.Web.DAL
             {
                 string query = @"SELECT * FROM perfil";
                 return connection.Query<Perfil>(query).ToList();
+            }
+        }
+
+        public bool PerfilDuplicado(string nome)
+        {
+            using(IDbConnection connection = new MySqlConnection(_connectionString))
+            {
+                string nomeNormalizado = nome.ToLowerInvariant().Normalize();
+
+                string query = @"SELECT COUNT(*) FROM perfil WHERE LOWER(Nome) = @NomeNormalizado";
+
+                int count = connection.ExecuteScalar<int>(query, new { NomeNormalizado = nomeNormalizado });
+                return count > 0;
             }
         }
     }
