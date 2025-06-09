@@ -51,6 +51,15 @@ namespace PickleScore.Web.Pages
         protected global::System.Web.UI.WebControls.Button btnEditar;
 
         /// <summary>
+        /// btnInativar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInativar;
+
+        /// <summary>
         /// lblMensagem control.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,41 @@ namespace PickleScore.Web.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridPerfis;
+
+        /// <summary>
+        /// blocoAlteracao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl blocoAlteracao;
+
+        /// <summary>
+        /// lblNomeAlteracao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNomeAlteracao;
+
+        /// <summary>
+        /// txtNomeAlteracao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomeAlteracao;
+
+        /// <summary>
+        /// btnSalvarAlteracao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvarAlteracao;
     }
 }

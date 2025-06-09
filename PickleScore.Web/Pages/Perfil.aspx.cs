@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Crypto.Digests;
+﻿using Org.BouncyCastle.Asn1.Ocsp;
+using Org.BouncyCastle.Crypto.Digests;
 using PickleScore.Web.DAL;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,14 @@ namespace PickleScore.Web.Pages
         {
             if (!IsPostBack) 
             {
+                if (Request.QueryString["sucesso"] == "true")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Sucesso", "alert('Perfil cadastrado com sucesso!');", true);
+                }
+
                 CarregarPerfis();
             }
+                
         }
 
         public void btnSalvar_Click(object sender, EventArgs e)
@@ -42,24 +49,87 @@ namespace PickleScore.Web.Pages
             };
 
             _perfilDAL.SalvarPerfil(perfil);
-            //Response.Redirect(Request.RawUrl);
-
-            ClientScript.RegisterStartupScript(this.GetType(), "Sucesso", "<script>window.sucessoCadastro = true;</script>", false);
 
             txtNome.Text = string.Empty;
             CarregarPerfis();
         }
 
-        public void btnEditar_Click(object sender, EventArgs e)
+        public void btnSalvarAlteracao_Click(object sender, EventArgs e) 
+        {
+            string perfilAlterado = txtNomeAlteracao.Text.Trim();
+            if (string.IsNullOrEmpty(perfilAlterado))
+            {
+                lblMensagem.Text = "O nome do perfil é obrigatório.";
+                return;
+            }
+
+            if (_perfilDAL.PerfilDuplicado(perfilAlterado))
+            {
+                lblMensagem.Text = $"Perfil duplicado, {perfilAlterado} já está cadastrado";
+                return;
+            }
+
+            if (ViewState["PerfilId"] == null)
+            {
+                lblMensagem.Text = "Nenhum perfil selecionado para alteração";
+                return;
+            }
+
+            int id = Convert.ToInt32(ViewState["PerfilId"]);
+
+            var novoPerfil = new Models.Perfil
+            {
+                Id = id,
+                Nome = perfilAlterado,
+                DataAlteracao = DateTime.Now
+            };
+
+            _perfilDAL.SalvarPerfil(novoPerfil);
+            ViewState["PerfilId"] = null;
+            txtNomeAlteracao.Text = string.Empty;
+            lblMensagem.Text = "Perfil Alterado";
+            blocoAlteracao.Visible = false;
+            CarregarPerfis();
+
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in gridPerfis.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
+                if (chk != null && chk.Checked)
+                {
+                    int id = Convert.ToInt32(gridPerfis.DataKeys[row.RowIndex].Value);
+                    var perfil = _perfilDAL.CarregarPerfil(id);
+
+                    txtNome.Text = perfil.Nome;
+                    ViewState["PerfilId"] = perfil.Id;
+
+                    blocoAlteracao.Visible = true;
+                    break;
+                }
+            }
+        }
+
+        public void btnInativar_Click()
         {
 
         }
 
-
         private void CarregarPerfis()
-        { 
-            gridPerfis.DataSource = _perfilDAL.ListarPerfis();
+        {
+            var listaPerfis = _perfilDAL.ListarPerfis();
+
+            foreach(var p in listaPerfis)
+            {
+                System.Diagnostics.Debug.WriteLine($"Perfil => Id:{p.Id}, Nome:{p.Nome}");
+            }
+
+            gridPerfis.DataSource = listaPerfis;
             gridPerfis.DataBind();
         }
+
+
     }
 }
