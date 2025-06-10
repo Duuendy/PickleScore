@@ -8,8 +8,10 @@
     <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px" />
     <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
     <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" CssClass="btn btn-primary" />
-    <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnInativar" runat="server" Text="Ver Inativos"  OnClick="btnInativar_Click" CssClass="btn btn-primary" />
     <asp:Label ID="lblMensagem" runat="server" Text=""></asp:Label>
+
+    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/PerfilInativo.aspx" CssClass="btn btn-secondary" />
 
     <hr />
 

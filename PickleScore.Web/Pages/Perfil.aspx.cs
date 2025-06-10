@@ -76,11 +76,13 @@ namespace PickleScore.Web.Pages
             }
 
             int id = Convert.ToInt32(ViewState["PerfilId"]);
+            var perfilAtual = _perfilDAL.CarregarPerfil(id);
 
             var novoPerfil = new Models.Perfil
             {
                 Id = id,
                 Nome = perfilAlterado,
+                Ativo = perfilAtual.Ativo,
                 DataAlteracao = DateTime.Now
             };
 
@@ -106,30 +108,57 @@ namespace PickleScore.Web.Pages
                     txtNome.Text = perfil.Nome;
                     ViewState["PerfilId"] = perfil.Id;
 
+                    txtNome.Text = string.Empty;
                     blocoAlteracao.Visible = true;
                     break;
                 }
             }
         }
 
-        public void btnInativar_Click()
+        public void btnInativar_Click(object sender, EventArgs e)
         {
+            foreach(GridViewRow row in gridPerfis.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
+                if(chk != null && chk.Checked)
+                {
+                    int id = Convert.ToInt32(gridPerfis.DataKeys[row.RowIndex].Value);
+                    var perfil = _perfilDAL.CarregarPerfil(id);
 
+                    txtNome.Text = perfil.Nome;
+                    ViewState["PerfilId"] = perfil.Id;
+
+                    if (ViewState["PerfilId"] == null)
+                    {
+                        lblMensagem.Text = "Nenhum perfil selecionado para alteração";
+                        return;
+                    }
+
+                    perfil.Ativo = false;
+                    perfil.DataAlteracao = DateTime.Now;
+                    perfil.UsuarioAlteracao = "admin";
+
+                    _perfilDAL.SalvarPerfil(perfil);
+                    
+                    lblMensagem.Text = "Perfil Inativado com sucesso";
+                    txtNome.Text = string.Empty;
+                    CarregarPerfis();
+
+                }
+                
+            }
         }
 
         private void CarregarPerfis()
         {
             var listaPerfis = _perfilDAL.ListarPerfis();
-
-            foreach(var p in listaPerfis)
+            var perfilAtivo = listaPerfis.Where(p => p.Ativo).ToList();
+            foreach (var p in listaPerfis)
             {
                 System.Diagnostics.Debug.WriteLine($"Perfil => Id:{p.Id}, Nome:{p.Nome}");
             }
-
-            gridPerfis.DataSource = listaPerfis;
+            gridPerfis.DataSource = perfilAtivo;
             gridPerfis.DataBind();
         }
-
-
     }
 }
