@@ -4,6 +4,7 @@ D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Microsoft.VisualStudi
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\PickleScore.Test.dll.config
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\PickleScore.Test.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\PickleScore.Test.pdb
+D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\BCrypt.Net-Next.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Dapper.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Microsoft.ApplicationInsights.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
@@ -42,6 +43,7 @@ D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\System.IO.Pipelines.d
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\K4os.Hash.xxHash.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\PickleScore.Web.pdb
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\PickleScore.Web.dll.config
+D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\BCrypt.Net-Next.xml
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Dapper.xml
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Microsoft.ApplicationInsights.pdb
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\Microsoft.ApplicationInsights.xml
@@ -171,5 +173,3 @@ D:\Estudos\Projetos\PickleScore\PickleScore.Test\obj\Debug\PickleScore.Test.cspr
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\obj\Debug\PickleSc.D15E6C9F.Up2Date
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\obj\Debug\PickleScore.Test.dll
 D:\Estudos\Projetos\PickleScore\PickleScore.Test\obj\Debug\PickleScore.Test.pdb
-D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\BCrypt.Net-Next.dll
-D:\Estudos\Projetos\PickleScore\PickleScore.Test\bin\Debug\BCrypt.Net-Next.xml

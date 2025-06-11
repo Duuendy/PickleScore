@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PickleScore.Web.Pages
+namespace PickleScore.Web.Pages.Profile
 {
 
 
-    public partial class Perfil
+    public partial class PerfilPages
     {
 
         /// <summary>

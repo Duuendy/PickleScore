@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PickleScore.Web.Pages
+namespace PickleScore.Web.Pages.Profile
 {
 
 

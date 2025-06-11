@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace PickleScore.Web.Pages
+namespace PickleScore.Web.Pages.Profile
 {
     public partial class PerfilInativo : System.Web.UI.Page
     {

@@ -8,9 +8,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace PickleScore.Web.Pages
+namespace PickleScore.Web.Pages.Profile
 {
-    public partial class Perfil : System.Web.UI.Page
+    public partial class PerfilPages : System.Web.UI.Page
     {
         public readonly PerfilDAL _perfilDAL = new PerfilDAL();
         public void Page_Load(object sender, EventArgs e)
