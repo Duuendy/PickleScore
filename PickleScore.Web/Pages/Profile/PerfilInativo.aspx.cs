@@ -45,7 +45,7 @@ namespace PickleScore.Web.Pages.Profile
 
                     perfilInativo.Ativo = true;
                     perfilInativo.DataAlteracao = DateTime.Now;
-                    perfilInativo.UsuarioAlteracao = "adim";
+                    perfilInativo.UsuarioAlteracao = 1;
 
                     _perfilDAL.SalvarPerfil(perfilInativo);
 

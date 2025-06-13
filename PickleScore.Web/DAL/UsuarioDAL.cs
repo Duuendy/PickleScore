@@ -7,6 +7,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Dapper;
 using PickleScore.Web.Models;
+using System.Threading;
 
 
 namespace PickleScore.Web.DAL
@@ -26,8 +27,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (usuario.Id == 0)
                 {
-                    string query = @"INSERT INTO usuario (Nome, Senha, Cpf, Email, Nascimento, PerfilId , DataInsercao, DataAlteracao) 
-                                VALUES (@Nome, @Senha, @Cpf, @Email, @Nascimento, @PerfilId, @DataInsercao, @DataAlteracao)";
+                    string query = @"INSERT INTO usuario (Nome, Senha, Cpf, Email, Nascimento, Ativo, PerfilId , DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
+                                VALUES (@Nome, @Senha, @Cpf, @Email, @Nascimento, @Ativo, @PerfilId, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
                     usuario.DataInsercao = DateTime.Now;
                     usuario.DataAlteracao = DateTime.Now;
                     connection.Execute(query, usuario);
@@ -61,7 +62,9 @@ namespace PickleScore.Web.DAL
                                     Email = @Email, 
                                     Nascimento = @Nascimento, 
                                     PerfilId = @PerfilId,
-                                    DataAlteracao = @DataAlteracao
+                                    Ativo = @Ativo,
+                                    DataAlteracao = @DataAlteracao,
+                                    UsuarioAlteracao = @UsuarioAlteracao
                                 WHERE id = @id";
                 connection.Execute(query, usuario);
             }
@@ -82,6 +85,19 @@ namespace PickleScore.Web.DAL
             {
                 string query = @"SELECT * FROM usuario";
                 return connection.Query<Usuario>(query).ToList();
+            }
+        }
+
+        public bool UsuarioDuplicado(string nome)
+        {
+            using(IDbConnection connection = new MySqlConnection(_connectionString))
+            {
+                string nomeNormalizado = nome.ToLowerInvariant().Normalize();
+
+                string query = @"SELECT COUNT(*) FROM usuario WHERE LOWER(Nome) = @NomeNormalizado";
+
+                int count = connection.ExecuteScalar<int>(query, new { nome = nomeNormalizado });
+                return count > 0;
             }
         }
     }

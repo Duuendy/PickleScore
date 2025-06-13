@@ -32,7 +32,7 @@ namespace PickleScore.Web.DAL
                     string query = @"INSERT INTO perfil (Nome, Ativo, DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
                                 VALUES (@Nome, @Ativo, @DataInsercao, @UsuarioInsercao, @DataAlteracao, UsuarioAlteracao)";
 
-                    perfil.UsuarioInsercao = "admin"; // Substitua pelo usuário atual
+                    perfil.UsuarioInsercao = 1; // Substitua pelo usuário atual
                     perfil.DataInsercao = DateTime.Now;
                     perfil.DataAlteracao = DateTime.Now;
                     connection.Execute(query, perfil);
@@ -67,7 +67,7 @@ namespace PickleScore.Web.DAL
                                 UsuarioAlteracao = @UsuarioAlteracao        
                                 WHERE Id = @Id";
                 perfil.DataAlteracao = DateTime.Now;
-                perfil.UsuarioAlteracao = "admin";
+                perfil.UsuarioAlteracao = 1;
                 connection.Execute(query, perfil);
             }
         }

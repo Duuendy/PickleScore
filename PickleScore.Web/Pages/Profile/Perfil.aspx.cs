@@ -1,10 +1,6 @@
-﻿using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Crypto.Digests;
-using PickleScore.Web.DAL;
+﻿using PickleScore.Web.DAL;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -46,6 +42,10 @@ namespace PickleScore.Web.Pages.Profile
             {
                 Nome = nomePerfil,
                 DataInsercao = DateTime.Now,
+                UsuarioInsercao = 1,
+                Ativo = true,
+                DataAlteracao = DateTime.Now,
+                UsuarioAlteracao = 1
             };
 
             _perfilDAL.SalvarPerfil(perfil);
@@ -83,7 +83,8 @@ namespace PickleScore.Web.Pages.Profile
                 Id = id,
                 Nome = perfilAlterado,
                 Ativo = perfilAtual.Ativo,
-                DataAlteracao = DateTime.Now
+                DataAlteracao = DateTime.Now,
+                UsuarioAlteracao = 1
             };
 
             _perfilDAL.SalvarPerfil(novoPerfil);
@@ -136,16 +137,14 @@ namespace PickleScore.Web.Pages.Profile
 
                     perfil.Ativo = false;
                     perfil.DataAlteracao = DateTime.Now;
-                    perfil.UsuarioAlteracao = "admin";
+                    perfil.UsuarioAlteracao = 1;
 
                     _perfilDAL.SalvarPerfil(perfil);
                     
                     lblMensagem.Text = "Perfil Inativado com sucesso";
                     txtNome.Text = string.Empty;
                     CarregarPerfis();
-
-                }
-                
+                }                
             }
         }
 

@@ -16,7 +16,11 @@ namespace PickleScore.Web.Models
         public string Email { get; set; }
         public DateTime Nascimento { get; set; }
         public int PerfilId { get; set; }
+        public bool Ativo { get; set; }
+
         public DateTime  DataInsercao { get; set; }
+        public int UsuarioInsercao { get; set; }
         public DateTime DataAlteracao { get; set; }
+        public int UsuarioAlteracao { get; set; }
     }
 }

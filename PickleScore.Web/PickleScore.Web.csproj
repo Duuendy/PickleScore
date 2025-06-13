@@ -175,8 +175,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Category\Categoria.aspx" />
+    <Content Include="Pages\Category\CategoriaInativo.aspx" />
     <Content Include="Pages\Profile\Perfil.aspx" />
     <Content Include="Pages\Profile\PerfilInativo.aspx" />
+    <Content Include="Pages\User\Usuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -241,6 +244,20 @@
     <Compile Include="DAL\FormaPagamentoDAL.cs" />
     <Compile Include="Models\FormaPagamento.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Pages\Category\Categoria.aspx.cs">
+      <DependentUpon>Categoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Category\Categoria.aspx.designer.cs">
+      <DependentUpon>Categoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Category\CategoriaInativo.aspx.cs">
+      <DependentUpon>CategoriaInativo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Category\CategoriaInativo.aspx.designer.cs">
+      <DependentUpon>CategoriaInativo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Profile\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -254,6 +271,13 @@
     </Compile>
     <Compile Include="Pages\Profile\PerfilInativo.aspx.designer.cs">
       <DependentUpon>PerfilInativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Usuario.aspx.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Usuario.aspx.designer.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="DAL\CampeonatoDAL.cs" />
@@ -286,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pages\Category\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
