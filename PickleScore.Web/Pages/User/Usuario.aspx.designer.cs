@@ -15,13 +15,13 @@ namespace PickleScore.Web.Pages.User
     {
 
         /// <summary>
-        /// btnNovoUsuario control.
+        /// btnAtivar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNovoUsuario;
+        protected global::System.Web.UI.WebControls.Button btnAtivar;
 
         /// <summary>
         /// gridUsuario control.
@@ -40,6 +40,15 @@ namespace PickleScore.Web.Pages.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNome;
+
+        /// <summary>
+        /// txtSobrenome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSobrenome;
 
         /// <summary>
         /// txtSenha control.

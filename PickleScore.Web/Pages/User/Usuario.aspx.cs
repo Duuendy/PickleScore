@@ -36,7 +36,7 @@ namespace PickleScore.Web.Pages.User
             //var usuario = new Models.Usuario
             //{
             //    Nome = nomeUsuario,
-            //    Cpf = 
+            //    Cpf =
             //}
         }
         private void carregarUsuarios()

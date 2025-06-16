@@ -11,6 +11,7 @@ namespace PickleScore.Web.Models
 
         public Usuario() { }
         public string Nome { get; set; }
+        public string Sobrenome { get; set; }
         public string Senha { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }

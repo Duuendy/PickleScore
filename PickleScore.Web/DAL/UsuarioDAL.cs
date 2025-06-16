@@ -27,8 +27,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (usuario.Id == 0)
                 {
-                    string query = @"INSERT INTO usuario (Nome, Senha, Cpf, Email, Nascimento, Ativo, PerfilId , DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
-                                VALUES (@Nome, @Senha, @Cpf, @Email, @Nascimento, @Ativo, @PerfilId, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
+                    string query = @"INSERT INTO usuario (Nome, Sobrenome, Senha, Cpf, Email, Nascimento, Ativo, PerfilId , DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
+                                VALUES (@Nome, @Sobrenome, @Senha, @Cpf, @Email, @Nascimento, @Ativo, @PerfilId, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
                     usuario.DataInsercao = DateTime.Now;
                     usuario.DataAlteracao = DateTime.Now;
                     connection.Execute(query, usuario);
@@ -56,7 +56,8 @@ namespace PickleScore.Web.DAL
             {
                 usuario.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE usuario 
-                                SET Nome = @Nome, 
+                                SET Nome = @Nome,
+                                    Sobrenome = @Sobrenome,
                                     Senha = @Senha, 
                                     Cpf = @Cpf, 
                                     Email = @Email, 

@@ -118,7 +118,21 @@ namespace PickleScore.Web.Pages.Profile
 
         public void btnInativar_Click(object sender, EventArgs e)
         {
-            foreach(GridViewRow row in gridPerfis.Rows)
+            string nome = txtNome.Text.Trim();
+
+            if (string.IsNullOrEmpty(nome))
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "mensagemAlerta",
+                    "mostrarModalSucesso('O nome é obrigatório.', 'warning');",
+                    true
+                );
+                return;
+            }
+
+            foreach (GridViewRow row in gridPerfis.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
                 if(chk != null && chk.Checked)
