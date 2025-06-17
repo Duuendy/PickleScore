@@ -18,7 +18,7 @@ namespace PickleScore.Web.Pages.Profile
                     ScriptManager.RegisterStartupScript(this, GetType(), "Sucesso", "alert('Perfil cadastrado com sucesso!');", true);
                 }
 
-                CarregarPerfis();
+                carregarPerfis();
             }
                 
         }
@@ -51,7 +51,7 @@ namespace PickleScore.Web.Pages.Profile
             _perfilDAL.SalvarPerfil(perfil);
 
             txtNome.Text = string.Empty;
-            CarregarPerfis();
+            carregarPerfis();
         }
 
         public void btnSalvarAlteracao_Click(object sender, EventArgs e) 
@@ -92,11 +92,11 @@ namespace PickleScore.Web.Pages.Profile
             txtNomeAlteracao.Text = string.Empty;
             lblMensagem.Text = "Perfil Alterado";
             blocoAlteracao.Visible = false;
-            CarregarPerfis();
+            carregarPerfis();
 
         }
 
-        protected void btnEditar_Click(object sender, EventArgs e)
+        public void btnEditar_Click(object sender, EventArgs e)
         {
             foreach (GridViewRow row in gridPerfis.Rows)
             {
@@ -157,12 +157,12 @@ namespace PickleScore.Web.Pages.Profile
                     
                     lblMensagem.Text = "Perfil Inativado com sucesso";
                     txtNome.Text = string.Empty;
-                    CarregarPerfis();
+                    carregarPerfis();
                 }                
             }
         }
 
-        private void CarregarPerfis()
+        private void carregarPerfis()
         {
             var listaPerfis = _perfilDAL.ListarPerfis();
             var perfilAtivo = listaPerfis.Where(p => p.Ativo).ToList();

@@ -29,8 +29,6 @@ namespace PickleScore.Web.DAL
                 {
                     string query = @"INSERT INTO usuario (Nome, Sobrenome, Senha, Cpf, Email, Nascimento, Ativo, PerfilId , DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
                                 VALUES (@Nome, @Sobrenome, @Senha, @Cpf, @Email, @Nascimento, @Ativo, @PerfilId, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
-                    usuario.DataInsercao = DateTime.Now;
-                    usuario.DataAlteracao = DateTime.Now;
                     connection.Execute(query, usuario);
                 }
                 else

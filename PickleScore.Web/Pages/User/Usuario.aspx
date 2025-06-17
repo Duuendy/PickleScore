@@ -5,11 +5,11 @@
     <h2>Cadastro de Usuário</h2>
 
     <button id="btnNovoUsuario" type="button" CssClass="btn btn-primary">Novo Usuário</button>
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Profile/PerfilInativo.aspx" CssClass="btn btn-secondary" />
+    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Profile/PerfilInativo.aspx" CssClass="btn btn-primary" />
     
     <hr />
     
-    <asp:GridView ID="gridUsuario" runat="server" DataKeyNames="Id" AutoGenerateColumns="false">
+    <asp:GridView ID="gridUsuario" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" OnRowCommand="gridUsuario_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>
@@ -20,10 +20,19 @@
             <asp:BoundField DataField="Sobrenome" HeaderText="Sobrenome" />
             <asp:BoundField DataField="Cpf" HeaderText="CPF" />
             <asp:BoundField DataField="Email" HeaderText="E-Mail" />
-            <asp:BoundField DataField="Nascimento" HeaderText="Data Nascimento" />
+            <asp:BoundField DataField="Nascimento" HeaderText="Data Nascimento" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false"/>
             <asp:BoundField DataField="PerfilId" HeaderText="Perfil" />
+            <asp:BoundField DataField="UsuarioInsercao" HeaderText="Usuario Inserção" />
             <asp:BoundField DataField="DataInsercao" HeaderText="Data de Inserção" />
-            <asp:BoundField DataField="DataAlteracao" HeaderText="Data de Alteração" />
+            <asp:BoundField DataField="UsuarioAlteracao" HeaderText="Usuario Alteração" />
+            <asp:BoundField DataField="DataAlteracao" HeaderText="Data de Alteração" />           
+            <asp:TemplateField HeaderText="Editar">
+                <ItemTemplate>
+                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-secondary" />
+                </ItemTemplate>
+            </asp:TemplateField>
+
+
         </Columns>
     </asp:GridView>
 
@@ -34,7 +43,7 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title">Cadastrar Usuário</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -51,8 +60,7 @@
 
                 <div class="modal-footer">
                     <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
