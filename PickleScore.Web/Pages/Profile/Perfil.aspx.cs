@@ -1,6 +1,7 @@
 ﻿using PickleScore.Web.DAL;
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,11 +14,6 @@ namespace PickleScore.Web.Pages.Profile
         {
             if (!IsPostBack) 
             {
-                if (Request.QueryString["sucesso"] == "true")
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Sucesso", "alert('Perfil cadastrado com sucesso!');", true);
-                }
-
                 carregarPerfis();
             }
                 
@@ -28,13 +24,24 @@ namespace PickleScore.Web.Pages.Profile
             string nomePerfil = txtNome.Text.Trim();
             if (string.IsNullOrEmpty(nomePerfil))
             {
-                lblMensagem.Text = "O nome do perfil é obrigatório.";
+                ScriptManager.RegisterStartupScript(
+                    this, 
+                    GetType(), 
+                    "alertaNomeVazio",
+                    "mostrarAlerta('O nome do perfil é obrigatório.', 'erro');",
+                    true);
                 return;
             }
 
             if (_perfilDAL.PerfilDuplicado(nomePerfil))
             {
-                lblMensagem.Text = $"Perfil duplicado, {nomePerfil} já está cadastrado";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaDuplicado",
+                    "mostrarAlerta('Perfil Duplicado, perfil já cadastrado', 'erro');",
+                    true
+                );
                 return;
             }
 
@@ -50,6 +57,14 @@ namespace PickleScore.Web.Pages.Profile
 
             _perfilDAL.SalvarPerfil(perfil);
 
+            ScriptManager.RegisterStartupScript(
+                this,
+                this.GetType(),
+                "alertaSucesso",
+                "mostrarAlerta('Perfil cadastrado com sucesso!', 'sucesso');",
+                true
+            );
+
             txtNome.Text = string.Empty;
             carregarPerfis();
         }
@@ -59,20 +74,38 @@ namespace PickleScore.Web.Pages.Profile
             string perfilAlterado = txtNomeAlteracao.Text.Trim();
             if (string.IsNullOrEmpty(perfilAlterado))
             {
-                lblMensagem.Text = "O nome do perfil é obrigatório.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaNomeVazio",
+                    "mostrarAlerta('O nome do perfil é obrigatório.', 'erro');",
+                    true);
                 return;
             }
 
             if (_perfilDAL.PerfilDuplicado(perfilAlterado))
             {
-                lblMensagem.Text = $"Perfil duplicado, {perfilAlterado} já está cadastrado";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaDuplicado",
+                    "mostrarAlerta('Perfil Duplicado, perfil já cadastrado', 'erro');",
+                    true
+                );
                 return;
             }
 
             if (ViewState["PerfilId"] == null)
             {
-                lblMensagem.Text = "Nenhum perfil selecionado para alteração";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaNaoSelecionado",
+                    "mostrarAlerta('Obrigatório selecionar um perfil', 'warning');",
+                    true
+                );
                 return;
+
             }
 
             int id = Convert.ToInt32(ViewState["PerfilId"]);
@@ -90,10 +123,10 @@ namespace PickleScore.Web.Pages.Profile
             _perfilDAL.SalvarPerfil(novoPerfil);
             ViewState["PerfilId"] = null;
             txtNomeAlteracao.Text = string.Empty;
-            lblMensagem.Text = "Perfil Alterado";
+            //lblMensagem.Text = "Perfil Alterado";    
             blocoAlteracao.Visible = false;
             carregarPerfis();
-
+            
         }
 
         public void btnEditar_Click(object sender, EventArgs e)
@@ -118,20 +151,7 @@ namespace PickleScore.Web.Pages.Profile
 
         public void btnInativar_Click(object sender, EventArgs e)
         {
-            string nome = txtNome.Text.Trim();
-
-            if (string.IsNullOrEmpty(nome))
-            {
-                ScriptManager.RegisterStartupScript(
-                    this,
-                    this.GetType(),
-                    "mensagemAlerta",
-                    "mostrarModalSucesso('O nome é obrigatório.', 'warning');",
-                    true
-                );
-                return;
-            }
-
+           
             foreach (GridViewRow row in gridPerfis.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
@@ -143,19 +163,19 @@ namespace PickleScore.Web.Pages.Profile
                     txtNome.Text = perfil.Nome;
                     ViewState["PerfilId"] = perfil.Id;
 
-                    if (ViewState["PerfilId"] == null)
-                    {
-                        lblMensagem.Text = "Nenhum perfil selecionado para alteração";
-                        return;
-                    }
-
                     perfil.Ativo = false;
                     perfil.DataAlteracao = DateTime.Now;
                     perfil.UsuarioAlteracao = 1;
 
                     _perfilDAL.SalvarPerfil(perfil);
-                    
-                    lblMensagem.Text = "Perfil Inativado com sucesso";
+
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "perfilInativado",
+                        "mostrarAlerta('Perfil Inativado com sucesso', 'sucesso');",
+                        true);
+
                     txtNome.Text = string.Empty;
                     carregarPerfis();
                 }                
@@ -164,13 +184,13 @@ namespace PickleScore.Web.Pages.Profile
 
         private void carregarPerfis()
         {
-            var listaPerfis = _perfilDAL.ListarPerfis();
-            var perfilAtivo = listaPerfis.Where(p => p.Ativo).ToList();
-            foreach (var p in listaPerfis)
+            var listaUsuario = _perfilDAL.ListarPerfis();
+            var usuarioAtivo = listaUsuario.Where(p => p.Ativo).ToList();
+            foreach (var p in listaUsuario)
             {
                 System.Diagnostics.Debug.WriteLine($"Perfil => Id:{p.Id}, Nome:{p.Nome}");
             }
-            gridPerfis.DataSource = perfilAtivo;
+            gridPerfis.DataSource = listaUsuario;
             gridPerfis.DataBind();
         }
     }

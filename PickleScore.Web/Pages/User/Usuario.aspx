@@ -5,7 +5,8 @@
     <h2>Cadastro de Usuário</h2>
 
     <button id="btnNovoUsuario" type="button" CssClass="btn btn-primary">Novo Usuário</button>
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Profile/PerfilInativo.aspx" CssClass="btn btn-primary" />
+    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/User/UsuarioInativo.aspx" CssClass="btn btn-primary" />
+    <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
     
     <hr />
     
@@ -31,8 +32,6 @@
                     <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-secondary" />
                 </ItemTemplate>
             </asp:TemplateField>
-
-
         </Columns>
     </asp:GridView>
 
@@ -43,7 +42,7 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title">Cadastrar Usuário</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -60,7 +59,7 @@
 
                 <div class="modal-footer">
                     <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -78,10 +77,6 @@
                 $('#modalUsuario').modal('show');
             });
         });
-
-
-        
-
 
     </script>
     

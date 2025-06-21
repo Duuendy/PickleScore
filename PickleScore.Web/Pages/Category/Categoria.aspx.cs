@@ -13,11 +13,6 @@ namespace PickleScore.Web.Pages.Category
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["sucesso"] == "true")
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Sucesso", "alert('Perfil cadastrado com sucesso!');", true);
-                }
-
                 CarregarCategoria();
             }
         }
@@ -27,13 +22,23 @@ namespace PickleScore.Web.Pages.Category
             string nomeCategoria = txtNome.Text.Trim();
             if (string.IsNullOrEmpty(nomeCategoria))
             {
-                lblMensagem.Text = "O nome da categoria é obrigatório.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaNomeVazio",
+                    "mostrarAlerta('O nome da categoria é obrigatória.', 'erro');",
+                    true);
                 return;
             }
 
             if (_categoriaDAL.CategoriaDuplicada(nomeCategoria))
             {
-                lblMensagem.Text = "Categoria já Existe.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "AlertaDuplicado",
+                    "mostrarAlerta('Categoria duplicada', 'warning');",
+                    true);
                 return;
             }
 
@@ -50,6 +55,13 @@ namespace PickleScore.Web.Pages.Category
             _categoriaDAL.SalvarCategoria(categoria);
 
             txtNome.Text = string.Empty;
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "alertaSucesso",
+                "mostrarAlerta('Cadatrada com sucesso!', 'sucesso')",
+                true);
             CarregarCategoria();
         }
 

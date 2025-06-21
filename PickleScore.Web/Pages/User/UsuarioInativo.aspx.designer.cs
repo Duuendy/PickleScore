@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PickleScore.Web.Pages.Profile
+namespace PickleScore.Web.Pages.User
 {
 
 
-    public partial class PerfilInativo
+    public partial class UsuarioInativo
     {
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace PickleScore.Web.Pages.Profile
         protected global::System.Web.UI.WebControls.Button btnVoltar;
 
         /// <summary>
-        /// gridPerfisInativos control.
+        /// gridUsuariosInativos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridPerfisInativos;
+        protected global::System.Web.UI.WebControls.GridView gridUsuariosInativos;
     }
 }

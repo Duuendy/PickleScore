@@ -180,6 +180,7 @@
     <Content Include="Pages\Profile\Perfil.aspx" />
     <Content Include="Pages\Profile\PerfilInativo.aspx" />
     <Content Include="Pages\User\Usuario.aspx" />
+    <Content Include="Pages\User\UsuarioInativo.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -235,6 +236,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Utils\Scripts\Alerta.js" />
     <Content Include="Views\Site.Master" />
     <Content Include="Web.config" />
     <Content Include="App_Start\Bundle.config" />
@@ -278,6 +280,13 @@
     </Compile>
     <Compile Include="Pages\User\Usuario.aspx.designer.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\UsuarioInativo.aspx.cs">
+      <DependentUpon>UsuarioInativo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\UsuarioInativo.aspx.designer.cs">
+      <DependentUpon>UsuarioInativo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="DAL\CampeonatoDAL.cs" />

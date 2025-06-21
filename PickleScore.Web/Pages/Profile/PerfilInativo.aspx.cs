@@ -49,7 +49,13 @@ namespace PickleScore.Web.Pages.Profile
 
                     _perfilDAL.SalvarPerfil(perfilInativo);
 
-                    lblMensagemInativos.Text = "Perfil ativado com sucesso";
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "perfilAtivado",
+                        "mostrarAlerta('Perfil ativado com sucesso', 'sucesso');",
+                        true);
+
                     carregarPerfisInativos();
 
                 }
