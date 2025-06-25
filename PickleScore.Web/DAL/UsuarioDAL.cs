@@ -119,7 +119,7 @@ namespace PickleScore.Web.DAL
             using (var conexao = new MySqlConnection(_connectionString))
             {
                 string query = idUsuario.HasValue
-                    ? "SELECT COUNT(*) FROM Usuario WHERE Email = @Email AND Id <> @IdUsuario)"
+                    ? "SELECT COUNT(*) FROM Usuario WHERE Email = @Email AND Id <> @IdUsuario"
                     : "SELECT COUNT(*) FROM Usuario WHERE Email = @Email";
 
                 int count = conexao.ExecuteScalar<int>(query, new { Email = email, IdUsuario = idUsuario });

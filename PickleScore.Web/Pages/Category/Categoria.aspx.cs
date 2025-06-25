@@ -70,19 +70,34 @@ namespace PickleScore.Web.Pages.Category
             string categoriaAlteracao = txtNomeAlteracao.Text.Trim();
             if(string.IsNullOrEmpty(categoriaAlteracao))
             {
-                lblMensagem.Text = "O nome da categoria é obrigatório.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaNomeVazio",
+                    "mostrarAlerta('O nome da categoria é obrigatória.', 'erro');",
+                    true);
                 return;
             }
 
             if(_categoriaDAL.CategoriaDuplicada(categoriaAlteracao))
             {
-                lblMensagem.Text = "Categoria já Existe.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "AlertaDuplicado",
+                    "mostrarAlerta('Categoria duplicada', 'warning');",
+                    true);
                 return;
             }
 
             if (ViewState["CategoriaId"] == null)
             {
-                lblMensagem.Text = "Nenhuma categoria selecionada para alteração.";
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "AlertaDuplicado",
+                    "mostrarAlerta('Nenhuma Categoria Selecionada', 'warning');",
+                    true);
                 return;
             }
 
@@ -101,7 +116,14 @@ namespace PickleScore.Web.Pages.Category
             _categoriaDAL.SalvarCategoria(novaCategoria);
             ViewState["CategoriaId"] = null;
             txtNome.Text = string.Empty;
-            lblMensagem.Text = "Categoria atualizada com sucesso!";
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "alertaSucesso",
+                "mostrarAlerta('Cadastrado com Sucesso!', 'sucesso');",
+                true);
+
             blocoAlteracao.Visible = false;
             CarregarCategoria();
         }
@@ -141,7 +163,13 @@ namespace PickleScore.Web.Pages.Category
 
                     if (ViewState["CategoriaId"] == null)
                     {
-                        lblMensagem.Text = "Nenhuma categorua selecionada para alteração";
+                        ScriptManager.RegisterStartupScript(
+                            this,
+                            GetType(),
+                            "AlertaDuplicado",
+                            "mostrarAlerta('Nenhuma Categoria Selecionada', 'warning');",
+                            true);
+                        return;
                     }
 
                     categoria.Ativo = false;
@@ -150,7 +178,7 @@ namespace PickleScore.Web.Pages.Category
 
                     _categoriaDAL.SalvarCategoria(categoria);
 
-                    lblMensagem.Text = "Categoria Inativado com sucesso";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "AlertaDuplicado", "mostrarAlerta('Categoria duplicada', 'warning');", true);
                     txtNome.Text = string.Empty;
                     CarregarCategoria();
                 }

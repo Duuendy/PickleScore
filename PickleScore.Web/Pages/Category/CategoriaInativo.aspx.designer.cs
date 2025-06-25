@@ -24,15 +24,6 @@ namespace PickleScore.Web.Pages.Category
         protected global::System.Web.UI.WebControls.Button btnAtivar;
 
         /// <summary>
-        /// lblMensagemInativos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensagemInativos;
-
-        /// <summary>
         /// btnVoltar control.
         /// </summary>
         /// <remarks>

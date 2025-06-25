@@ -50,7 +50,12 @@ namespace PickleScore.Web.Pages.Category
 
                     _categoriaDAL.SalvarCategoria(categoriaInativo);
 
-                    lblMensagemInativos.Text = "Categoria ativada com sucesso";
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "alertaSucesso",
+                        "mostrarAlerta('Cadastrado com Sucesso!', 'sucesso');",
+                        true);
                     carregarCategoriasInativas();
                 }
             }

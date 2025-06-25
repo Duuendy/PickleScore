@@ -4,10 +4,13 @@
 
     <h2>Ativar de Perfil</h2>
 
-    
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" OnClick="btnAtivar_Click" CssClass="btn btn-primary" />
-    <%--<asp:Label ID="lblMensagemInativos" runat="server" Text=""></asp:Label>--%>
-    <asp:Button ID="btnVoltar" runat="server" Text="Voltar" PostBackUrl="~/Pages/Profile/Perfil.aspx" CssClass="btn btn-primary" />
+    <hr />
+
+    <div style="display:flex; gap:10px">
+        <asp:Button ID="btnAtivar" runat="server" Text="Ativar" OnClick="btnAtivar_Click" CssClass="btn btn-primary" />
+        <%--<asp:Label ID="lblMensagemInativos" runat="server" Text=""></asp:Label>--%>
+        <asp:Button ID="btnVoltar" runat="server" Text="Voltar" PostBackUrl="~/Pages/Profile/Perfil.aspx" CssClass="btn btn-primary" />
+    </div>
     
     <hr />
     

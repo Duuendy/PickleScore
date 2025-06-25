@@ -3,10 +3,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Ativar de Usuário</h2>
+    
+    <hr />
 
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" OnClick="btnAtivar_Click" CssClass="btn btn-primary" />
-    <%--<asp:Label ID="lblMensagemInativos" runat="server" Text=""></asp:Label>--%>
-    <asp:Button ID="btnVoltar" runat="server" Text="Voltar" PostBackUrl="~/Pages/User/Usuario.aspx" CssClass="btn btn-primary" />
+    <div style="display:flex; gap:10px">
+        <asp:Button ID="btnAtivar" runat="server" Text="Ativar" OnClick="btnAtivar_Click" CssClass="btn btn-primary" />
+        <%--<asp:Label ID="lblMensagemInativos" runat="server" Text=""></asp:Label>--%>
+        <asp:Button ID="btnVoltar" runat="server" Text="Voltar" PostBackUrl="~/Pages/User/Usuario.aspx" CssClass="btn btn-primary" />
+    </div>
     
     <hr />
     

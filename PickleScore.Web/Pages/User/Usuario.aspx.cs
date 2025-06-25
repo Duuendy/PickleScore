@@ -1,5 +1,6 @@
 ﻿using PickleScore.Web.Compatilhado;
 using PickleScore.Web.DAL;
+using PickleScore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -28,53 +29,79 @@ namespace PickleScore.Web.Pages.User
             int? idUsuario = ViewState["UsuarioId"] != null
                 ? Convert.ToInt32(ViewState["UsuarioId"]) : (int?)null;
 
-            if (!ValidarUsuario(out string mensagem, idUsuario))
+            if (!idUsuario.HasValue ||idUsuario.Value == 0)
             {
-                ScriptManager.RegisterStartupScript(
-                    this,
-                    GetType(),
-                    "alertaValidacao",
-                    $"mostrarAlerta('{mensagem}', 'warning');",
-                    true
-                );
-                return;
-            }
+                if (!ValidarUsuario(out string mensagem, idUsuario))
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "alertaValidacao",
+                        $"mostrarAlerta('{mensagem}', 'warning');",
+                        true
+                    );
+                    return;
+                }
 
-            string nomeUsuario = txtNome.Text.Trim();
-            string sobreNomeUsuario = txtSobrenome.Text.Trim();
-            string cpfUsuario = txtCpf.Text.Trim();
-            string senhaUsuario = Criptografia.CriptografarSenha(txtSenha.Text);
-            string emailUsuario = txtEmail.Text.Trim();
-            DateTime nascimentoUsuario = Convert.ToDateTime(txtNascimento.Text).Date;
-            int perfilUsuario = Convert.ToInt32(ddlPerfil.SelectedValue);
-            
+                string nomeUsuario = txtNome.Text.Trim();
+                string sobreNomeUsuario = txtSobrenome.Text.Trim();
+                string cpfUsuario = txtCpf.Text.Trim();
+                string senhaUsuario = Criptografia.CriptografarSenha(txtSenha.Text);
+                string emailUsuario = txtEmail.Text.Trim();
+                DateTime nascimentoUsuario = Convert.ToDateTime(txtNascimento.Text).Date;
+                int perfilUsuario = Convert.ToInt32(ddlPerfil.SelectedValue);
 
-            var novoUsuario = new Models.Usuario
-            {
-                Id = idUsuario ?? 0,
-                Nome = nomeUsuario,
-                Sobrenome = sobreNomeUsuario,
-                Cpf = cpfUsuario,
-                Senha = senhaUsuario,
-                Email = emailUsuario,
-                Nascimento = nascimentoUsuario,
-                PerfilId = perfilUsuario,
-                Ativo = true,
-                DataInsercao = DateTime.Now,
-                UsuarioInsercao = 1,
-                DataAlteracao = DateTime.Now,
-                UsuarioAlteracao = 1
-            };
 
-            if (idUsuario.HasValue)
-            {
-                _usuarioDAL.AtualizarUsuario(novoUsuario);
+                var novoUsuario = new Models.Usuario
+                {
+                    Id = idUsuario ?? 0,
+                    Nome = nomeUsuario,
+                    Sobrenome = sobreNomeUsuario,
+                    Cpf = cpfUsuario,
+                    Senha = senhaUsuario,
+                    Email = emailUsuario,
+                    Nascimento = nascimentoUsuario,
+                    PerfilId = perfilUsuario,
+                    Ativo = true,
+                    DataInsercao = DateTime.Now,
+                    UsuarioInsercao = 1,
+                    DataAlteracao = DateTime.Now,
+                    UsuarioAlteracao = 1
+                };
+
+                _usuarioDAL.CadastrarUsuario(novoUsuario);
             }
             else
             {
-                _usuarioDAL.CadastrarUsuario(novoUsuario);
+                string nomeUsuarioEditado = txtNome.Text.Trim();
+                string sobreNomeUsuarioEditado = txtSobrenome.Text.Trim();
+                string cpfUsuarioEditado = txtCpf.Text.Trim();
+                string senhaUsuarioEditado = Criptografia.CriptografarSenha(txtSenha.Text);
+                string emailUsuarioEditado = txtEmail.Text.Trim();
+                DateTime nascimentoUsuarioEditado = Convert.ToDateTime(txtNascimento.Text).Date;
+                int perfilUsuarioEditado = Convert.ToInt32(ddlPerfil.SelectedValue);
+
+                var perfilEditado = new Models.Usuario
+                {
+                    Id = idUsuario ?? 0,
+                    Nome = nomeUsuarioEditado,
+                    Sobrenome = sobreNomeUsuarioEditado,
+                    Cpf = cpfUsuarioEditado,
+                    Senha = senhaUsuarioEditado,
+                    Email = emailUsuarioEditado,
+                    Nascimento = nascimentoUsuarioEditado,
+                    PerfilId = perfilUsuarioEditado,
+                    Ativo = true,
+                    DataInsercao = DateTime.Now,
+                    UsuarioInsercao = 1,
+                    DataAlteracao = DateTime.Now,
+                    UsuarioAlteracao = 1
+                };
+
+                _usuarioDAL.AtualizarUsuario(perfilEditado);
 
             }
+
 
             ViewState["UsuarioId"] = null;
 
@@ -89,7 +116,7 @@ namespace PickleScore.Web.Pages.User
             carregarUsuarios();
         }
 
-
+        
 
         public void btnInativar_Click(Object sender, EventArgs e)
         {

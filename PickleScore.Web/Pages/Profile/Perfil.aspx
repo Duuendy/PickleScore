@@ -7,13 +7,14 @@
     <asp:Label ID="lblNome" runat="server" Text="Nome do Perfil:"></asp:Label>
     <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px" />
     <hr />
-    <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
-    <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" CssClass="btn btn-primary" />
-    <asp:Button ID="btnInativar" runat="server" Text="Inativar"  OnClick="btnInativar_Click" CssClass="btn btn-secondary" />
-    <%--<asp:Label ID="lblMensagem" runat="server" Text=""></asp:Label>--%>
-
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Profile/PerfilInativo.aspx" CssClass="btn btn-secondary" />
-
+    <div style="display:flex; gap:10px">
+        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
+        <asp:Button ID="btnEditar" runat="server" Text="Editar" OnClick="btnEditar_Click" CssClass="btn btn-primary" />
+        <asp:Button ID="btnInativar" runat="server" Text="Inativar"  OnClick="btnInativar_Click" CssClass="btn btn-secondary" />
+        <%--<asp:Label ID="lblMensagem" runat="server" Text=""></asp:Label>--%>
+        <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Profile/PerfilInativo.aspx" CssClass="btn btn-secondary" />
+    </div>
+    
     <hr />
 
     <asp:GridView ID="gridPerfis" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table">

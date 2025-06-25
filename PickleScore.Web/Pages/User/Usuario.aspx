@@ -3,10 +3,11 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Cadastro de Usuário</h2>
-
-    <button id="btnNovoUsuario" type="button" CssClass="btn btn-primary">Novo Usuário</button>
-    <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/User/UsuarioInativo.aspx" CssClass="btn btn-primary" />
-    <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
+    <div style="display:flex; gap: 8px">
+        <button id="btnNovoUsuario" type="button" Class="btn btn-primary">Novo Usuário</button>
+        <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
+        <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/User/UsuarioInativo.aspx" CssClass="btn btn-primary" />
+    </div>
     
     <hr />
     
@@ -77,7 +78,6 @@
                 $('#modalUsuario').modal('show');
             });
         });
-
     </script>
     
 </asp:Content>
