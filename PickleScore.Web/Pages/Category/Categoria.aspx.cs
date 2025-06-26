@@ -150,7 +150,9 @@ namespace PickleScore.Web.Pages.Category
 
         public void btnInativar_Click(object sender, EventArgs e)
         {
-            foreach(GridViewRow row in gridCategorias.Rows)
+            bool algumSelecionado = false;
+
+            foreach (GridViewRow row in gridCategorias.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
                 if(chk != null && chk.Checked)
@@ -161,28 +163,37 @@ namespace PickleScore.Web.Pages.Category
                     txtNome.Text = categoria.Nome;
                     ViewState["CategoriaId"] = categoria.Id;
 
-                    if (ViewState["CategoriaId"] == null)
-                    {
-                        ScriptManager.RegisterStartupScript(
-                            this,
-                            GetType(),
-                            "AlertaDuplicado",
-                            "mostrarAlerta('Nenhuma Categoria Selecionada', 'warning');",
-                            true);
-                        return;
-                    }
-
                     categoria.Ativo = false;
                     categoria.DataAlteracao = DateTime.Now;
                     categoria.UsuarioAlteracao = 1;
 
                     _categoriaDAL.SalvarCategoria(categoria);
-
-                    ScriptManager.RegisterStartupScript(this, GetType(), "AlertaDuplicado", "mostrarAlerta('Categoria duplicada', 'warning');", true);
-                    txtNome.Text = string.Empty;
-                    CarregarCategoria();
+                    algumSelecionado = true;
                 }
             }
+
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "categoriaInativada",
+                    "mostrarAlerta('Categoria Inativada com sucesso', 'sucesso');",
+                    true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "categoriaInativado",
+                    "mostrarAlerta('Nenhum categoria selecionada', 'warning');",
+                    true);
+            }
+
+            txtNome.Text = string.Empty;
+            ViewState["CategoriaId"] = null;
+            CarregarCategoria();
         }
 
 

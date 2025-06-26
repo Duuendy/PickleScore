@@ -33,10 +33,12 @@ namespace PickleScore.Web.Pages.User
 
         public void btnAtivar_Click(object sender, EventArgs e)
         {
-            foreach(GridViewRow row in gridUsuariosInativos.Rows)
+            bool algumSelecionado = false;
+
+            foreach (GridViewRow row in gridUsuariosInativos.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
-                if(chk != null && chk.Checked)
+                if (chk != null && chk.Checked)
                 {
                     int id = Convert.ToInt32(gridUsuariosInativos.DataKeys[row.RowIndex].Value);
                     var usuarioInativo = _usuarioDAL.CarregarUsuario(id);
@@ -48,17 +50,31 @@ namespace PickleScore.Web.Pages.User
                     usuarioInativo.UsuarioAlteracao = 1;
 
                     _usuarioDAL.CadastrarUsuario(usuarioInativo);
+                    algumSelecionado = true;
+                }
+            }
 
-                    ScriptManager.RegisterStartupScript(
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
                         this,
                         GetType(),
                         "perfilAtivado",
                         "mostrarAlerta('Usuário ativado com sucesso', 'sucesso');",
                         true);
-
-                    carregarUsuarioInativos();
-                }
             }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                      this,
+                      GetType(),
+                      "alertaSucesso",
+                      "mostrarAlerta('Nenhuma categoria selecionada', 'warning');",
+                      true);
+            }
+
+            ViewState["UsuarioId"] = null;
+            carregarUsuarioInativos();
         }
     }
 }

@@ -33,6 +33,8 @@ namespace PickleScore.Web.Pages.Profile
 
         public void btnAtivar_Click(object sender, EventArgs e)
         {
+            bool algumSelecionado = false;
+
             foreach (GridViewRow row in gridPerfisInativos.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
@@ -48,19 +50,30 @@ namespace PickleScore.Web.Pages.Profile
                     perfilInativo.UsuarioAlteracao = 1;
 
                     _perfilDAL.SalvarPerfil(perfilInativo);
-
-                    ScriptManager.RegisterStartupScript(
+                    algumSelecionado = true;
+                }
+            }
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
                         this,
                         GetType(),
                         "perfilAtivado",
                         "mostrarAlerta('Perfil ativado com sucesso', 'sucesso');",
                         true);
-
-                    carregarPerfisInativos();
-
-                }
             }
-            
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                      this,
+                      GetType(),
+                      "alertaSucesso",
+                      "mostrarAlerta('Nenhuma categoria selecionada', 'warning');",
+                      true);
+            }
+
+            ViewState["PerfilId"] = null;
+            carregarPerfisInativos();
         }
     }
 }

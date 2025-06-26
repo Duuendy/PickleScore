@@ -151,7 +151,8 @@ namespace PickleScore.Web.Pages.Profile
 
         public void btnInativar_Click(object sender, EventArgs e)
         {
-           
+            bool algumSelecionado = false;
+
             foreach (GridViewRow row in gridPerfis.Rows)
             {
                 CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
@@ -168,18 +169,32 @@ namespace PickleScore.Web.Pages.Profile
                     perfil.UsuarioAlteracao = 1;
 
                     _perfilDAL.SalvarPerfil(perfil);
-
-                    ScriptManager.RegisterStartupScript(
-                        this,
-                        GetType(),
-                        "perfilInativado",
-                        "mostrarAlerta('Perfil Inativado com sucesso', 'sucesso');",
-                        true);
-
-                    txtNome.Text = string.Empty;
-                    carregarPerfis();
+                    algumSelecionado = true;
                 }                
             }
+
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
+                   this,
+                   GetType(),
+                   "perfilInativado",
+                   "mostrarAlerta('Perfil Inativado com sucesso', 'sucesso');",
+                   true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "usuarioInativado",
+                    "mostrarAlerta('Nenhum usuário selecionado', 'warning');",
+                    true);
+            }
+
+            txtNome.Text = string.Empty;
+            ViewState["PerfilId"] = null;
+            carregarPerfis();
         }
 
         private void carregarPerfis()
@@ -190,7 +205,7 @@ namespace PickleScore.Web.Pages.Profile
             {
                 System.Diagnostics.Debug.WriteLine($"Perfil => Id:{p.Id}, Nome:{p.Nome}");
             }
-            gridPerfis.DataSource = listaUsuario;
+            gridPerfis.DataSource = usuarioAtivo;
             gridPerfis.DataBind();
         }
     }

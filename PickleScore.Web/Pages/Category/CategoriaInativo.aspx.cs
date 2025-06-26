@@ -33,6 +33,7 @@ namespace PickleScore.Web.Pages.Category
 
         public void btnAtivar_Click(object sender, EventArgs e)
         {
+            bool algumSelecionado = false;
 
             foreach(GridViewRow row in gridCategoriaInativos.Rows)
             {
@@ -49,16 +50,33 @@ namespace PickleScore.Web.Pages.Category
                     categoriaInativo.UsuarioAlteracao = 1;
 
                     _categoriaDAL.SalvarCategoria(categoriaInativo);
+                    algumSelecionado = true;
 
-                    ScriptManager.RegisterStartupScript(
-                        this,
-                        GetType(),
-                        "alertaSucesso",
-                        "mostrarAlerta('Cadastrado com Sucesso!', 'sucesso');",
-                        true);
-                    carregarCategoriasInativas();
                 }
             }
+
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
+                      this,
+                      GetType(),
+                      "alertaSucesso",
+                      "mostrarAlerta('Categoria ativada com Sucesso!', 'sucesso');",
+                      true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                      this,
+                      GetType(),
+                      "alertaSucesso",
+                      "mostrarAlerta('Nenhuma categoria selecionada', 'warning');",
+                      true);
+            }
+
+            ViewState["CategoriaId"] = null;
+            carregarCategoriasInativas();
+
         }
     }
 }
