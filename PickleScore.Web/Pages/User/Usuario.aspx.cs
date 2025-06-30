@@ -116,8 +116,6 @@ namespace PickleScore.Web.Pages.User
             carregarUsuarios();
         }
 
-        
-
         public void btnInativar_Click(Object sender, EventArgs e)
         {
             bool algumSelecionado = false;

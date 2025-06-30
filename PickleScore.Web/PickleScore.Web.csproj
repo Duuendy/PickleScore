@@ -177,6 +177,8 @@
     <Content Include="Global.asax" />
     <Content Include="Pages\Category\Categoria.aspx" />
     <Content Include="Pages\Category\CategoriaInativo.aspx" />
+    <Content Include="Pages\Level\Nivel.aspx" />
+    <Content Include="Pages\Level\NivelInativado.aspx" />
     <Content Include="Pages\Profile\Perfil.aspx" />
     <Content Include="Pages\Profile\PerfilInativo.aspx" />
     <Content Include="Pages\User\Usuario.aspx" />
@@ -259,6 +261,20 @@
     </Compile>
     <Compile Include="Pages\Category\CategoriaInativo.aspx.designer.cs">
       <DependentUpon>CategoriaInativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Level\Nivel.aspx.cs">
+      <DependentUpon>Nivel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Level\Nivel.aspx.designer.cs">
+      <DependentUpon>Nivel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Level\NivelInativado.aspx.cs">
+      <DependentUpon>NivelInativado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Level\NivelInativado.aspx.designer.cs">
+      <DependentUpon>NivelInativado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Profile\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

@@ -6,8 +6,8 @@
 
     <hr />
   
-        <asp:Label ID="lblNome" runat="server" Text="Nome da Categoria"></asp:Label>
-        <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px" />
+    <asp:Label ID="lblNome" runat="server" Text="Nome da Categoria"></asp:Label>
+    <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px" />
     
     <hr />
     

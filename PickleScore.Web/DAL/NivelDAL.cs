@@ -26,15 +26,16 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (nivel.Id == 0)
                 {
-                    string query = @"INSERT INTO nivel (Nome, DataInsercao, DataAlteracao) 
-                                 VALUES (@Nome, @DataInsercao, @DataAlteracao)";
+                    string query = @"INSERT INTO nivel (Nome, Ativo, DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
+                                 VALUES (@Nome, @Ativo, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
+                    nivel.UsuarioInsercao = 1;
                     nivel.DataInsercao = DateTime.Now;
                     nivel.DataAlteracao = DateTime.Now;
                     connection.Execute(query, nivel);
                 }
                 else
                 {
-                    AtualizarNivel(nivel);
+                    atualizarNivel(nivel);
                 }
             }
         }
@@ -47,15 +48,18 @@ namespace PickleScore.Web.DAL
                 return connection.QueryFirstOrDefault<Nivel>(query, new { Id = id });
             }
         }
-        public void AtualizarNivel(Nivel nivel)
+        private void atualizarNivel(Nivel nivel)
         {
             using (IDbConnection connection = new MySqlConnection(_connectionString))
             {
-                nivel.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE nivel 
                                  SET Nome = @Nome, 
-                                 DataAlteracao = @DataAlteracao 
+                                 Ativo = @Ativo,
+                                 DataAlteracao = @DataAlteracao,
+                                 UsuarioAlteracao = @UsuarioAlteracao
                                  WHERE Id = @Id";
+                nivel.DataAlteracao = DateTime.Now;
+                nivel.UsuarioAlteracao = 1;
                 connection.Execute(query, nivel);
             }
         }
@@ -74,6 +78,19 @@ namespace PickleScore.Web.DAL
                 string query = @"SELECT * FROM nivel";
                 return connection.Query<Nivel>(query).ToList();
             }
-        } 
+        }
+
+        public bool NivelDuplicado(string nivel)
+        {
+            using(IDbConnection connection = new MySqlConnection(_connectionString))
+            {
+                string nomeNormalizado = nivel.ToLowerInvariant().Normalize();
+
+                string query = @"SELECT COUNT(*) FROM nivel WHERE LOWER(Nivel) = @NomeNormalizado";
+
+                int count = connection.ExecuteScalar<int>(query, new { NomeNormalizado = nomeNormalizado });
+                return count > 0;
+            }
+        }
     }
 }

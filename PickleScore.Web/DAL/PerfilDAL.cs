@@ -59,7 +59,6 @@ namespace PickleScore.Web.DAL
         {
             using (IDbConnection connection = new MySqlConnection(_connectionString))
             {
-                perfil.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE perfil 
                                 SET Nome = @Nome, 
                                 Ativo = @Ativo,
