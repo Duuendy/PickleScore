@@ -175,6 +175,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\AgeRange\FaixaEtaria.aspx" />
+    <Content Include="Pages\AgeRange\FaixaEtariaInativa.aspx" />
     <Content Include="Pages\Category\Categoria.aspx" />
     <Content Include="Pages\Category\CategoriaInativo.aspx" />
     <Content Include="Pages\Level\Nivel.aspx" />
@@ -248,6 +250,20 @@
     <Compile Include="DAL\FormaPagamentoDAL.cs" />
     <Compile Include="Models\FormaPagamento.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Pages\AgeRange\FaixaEtaria.aspx.cs">
+      <DependentUpon>FaixaEtaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AgeRange\FaixaEtaria.aspx.designer.cs">
+      <DependentUpon>FaixaEtaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AgeRange\FaixaEtariaInativa.aspx.cs">
+      <DependentUpon>FaixaEtariaInativa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AgeRange\FaixaEtariaInativa.aspx.designer.cs">
+      <DependentUpon>FaixaEtariaInativa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Category\Categoria.aspx.cs">
       <DependentUpon>Categoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
