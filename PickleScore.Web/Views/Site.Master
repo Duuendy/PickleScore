@@ -61,6 +61,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Profile/Perfil.aspx">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/User/Usuario.aspx">Usuario</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Category/Categoria.aspx">Categoria</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Level/Nivel.aspx">Nível</a></li>
                     </ul>
                 </div>
             </div>

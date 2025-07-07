@@ -29,7 +29,7 @@ namespace PickleScore.Web.Pages.User
             int? idUsuario = ViewState["UsuarioId"] != null
                 ? Convert.ToInt32(ViewState["UsuarioId"]) : (int?)null;
 
-            if (!idUsuario.HasValue ||idUsuario.Value == 0)
+            if (!idUsuario.HasValue || idUsuario.Value == 0)
             {
                 if (!ValidarUsuario(out string mensagem, idUsuario))
                 {

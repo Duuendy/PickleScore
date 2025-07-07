@@ -80,17 +80,23 @@ namespace PickleScore.Web.DAL
             }
         }
 
-        public bool NivelDuplicado(string nivel)
+        public bool NivelDuplicado(string nome, int? idAtual = null)
         {
-            using(IDbConnection connection = new MySqlConnection(_connectionString))
+            using (IDbConnection connection = new MySqlConnection(_connectionString))
             {
-                string nomeNormalizado = nivel.ToLowerInvariant().Normalize();
+                string nomeNormalizado = nome.ToLowerInvariant().Trim();
 
-                string query = @"SELECT COUNT(*) FROM nivel WHERE LOWER(Nivel) = @NomeNormalizado";
+                string query = @"SELECT COUNT(*) FROM nivel WHERE LOWER(Nome) = @nome AND Ativo = 1";
 
-                int count = connection.ExecuteScalar<int>(query, new { NomeNormalizado = nomeNormalizado });
+                if (idAtual.HasValue)
+                {
+                    query += " AND Id <> @idAtual";
+                }
+
+                int count = connection.ExecuteScalar<int>(query, new { nome = nomeNormalizado, idAtual });
                 return count > 0;
             }
         }
+
     }
 }

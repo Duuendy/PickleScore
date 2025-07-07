@@ -23,11 +23,6 @@
             <asp:BoundField DataField="Nome" HeaderText="Nome" />
             <asp:BoundField DataField="DataInsercao" HeaderText="Data de Inserção" />
             <asp:BoundField DataField="DataAlteracao" HeaderText="Data de Alteração" />           
-            <asp:TemplateField HeaderText="Editar">
-                <ItemTemplate>
-                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-secondary" />
-                </ItemTemplate>
-            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 

@@ -33,6 +33,47 @@ namespace PickleScore.Web.Pages.Level
 
         public void btnAtivar_Click(object sender, EventArgs e)
         {
+            bool algumSelecionado = false;
+
+            foreach(GridViewRow row in gridNivelInativo.Rows)
+            {
+                CheckBox ckh = (CheckBox)row.FindControl("chkSelecionado");
+                if(ckh != null && ckh.Checked) 
+                {
+                    int id = Convert.ToInt32(gridNivelInativo.DataKeys[row.RowIndex].Value);
+                    var nivelInativo = _nivelDAL.CarregarNivel(id);
+
+                    ViewState["NivelId"] = nivelInativo.Id;
+
+                    nivelInativo.Ativo = true;
+                    nivelInativo.DataInsercao = DateTime.Now;
+                    nivelInativo.UsuarioAlteracao = 1;
+
+                    _nivelDAL.SalvarNivel(nivelInativo);
+                    algumSelecionado= true;
+                }
+            }
+
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "nivelAtivado",
+                        "mostrarAlerta('Usuário ativado com sucesso', 'sucesso');",
+                        true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                      this,
+                      GetType(),
+                      "alertaSucesso",
+                      "mostrarAlerta('Nenhuma categoria selecionada', 'warning');",
+                      true);
+            }
+
+            ViewState["NivelId"] = null;
             carregarNivelInativo();
         }
     }

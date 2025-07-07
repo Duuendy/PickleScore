@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -21,61 +22,161 @@ namespace PickleScore.Web.Pages.Level
 
         public void btnSalvar_Click(object sender, EventArgs e)
         {
-            string nomeNivel = txtNome.Text.Trim();
-            if (string.IsNullOrEmpty(nomeNivel))
+            int? idNivel = ViewState["NivelId"] != null
+                ? Convert.ToInt32(ViewState["NivelId"]) : (int?)null;
+
+            if (!idNivel.HasValue || idNivel.Value == 0)
             {
-                ScriptManager.RegisterStartupScript(
-                    this,
-                    GetType(),
-                    "alertaNIvelVazio",
-                    "mostrarAlerta('O nome do perfil é obrigatório.', 'erro');",
-                    true);
-                return;
+                if (!ValidarNivel(out string mensagem, idNivel))
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "alertaValidacao",
+                        $"mostrarAlerta('{mensagem}', 'warning');",
+                        true);
+                    return;
+                }
+
+                string nivel = txtNome.Text.Trim();
+
+                var novoNivel = new Models.Nivel
+                {
+                    Id = idNivel ?? 0,
+                    Nome = nivel,
+                    Ativo = true,
+                    DataInsercao = DateTime.Now,
+                    UsuarioInsercao = 1,
+                };
+
+                _nivelDAL.SalvarNivel(novoNivel);
+            }
+            else
+            {
+                string nomeNivelEditado = txtNomeModal.Text.Trim();
+                if (!ValidarNivel(out string mensagem, idNivel))
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this,
+                        GetType(),
+                        "alertaValidacao",
+                        $"mostrarAlerta('{mensagem}', 'warning');",
+                        true);
+                    return;
+                }
+
+                var nivelEditado = new Models.Nivel
+                {
+                    Id = idNivel ?? 0,
+                    Nome = nomeNivelEditado,
+                    Ativo = true,
+                    DataAlteracao = DateTime.Now,
+                    UsuarioAlteracao = 1,
+                };
+
+                _nivelDAL.SalvarNivel(nivelEditado);
             }
 
-            if (_nivelDAL.NivelDuplicado(nomeNivel))
-            {
-                ScriptManager.RegisterStartupScript(
-                    this,
-                    GetType(),
-                    "alertaDuplicado",
-                    "mostrarAlerta('Perfil Duplicado, perfil já cadastrado', 'erro');",
-                    true
-                );
-                return;
-            }
-
-            var nivel = new Models.Nivel
-            {
-                Nome = nomeNivel,
-                DataInsercao = DateTime.Now,
-                UsuarioInsercao = 1,
-                Ativo = true,
-                DataAlteracao = DateTime.Now,
-                UsuarioAlteracao = 1,
-            };
-
-            _nivelDAL.SalvarNivel(nivel);
+            ViewState["NivelId"] = null;
 
             ScriptManager.RegisterStartupScript(
-               this,
-               this.GetType(),
-               "alertaSucesso",
-               "mostrarAlerta('Perfil cadastrado com sucesso!', 'sucesso');",
-               true
-           );
+                this,
+                GetType(),
+                "alertaSucesso",
+                "mostrarAlerta('Cadastrado com Sucesso!', 'sucesso');",
+                true);
 
             txtNome.Text = string.Empty;
             carregarNivel();
-
         }
-        public void btnEditar_Click(object sender, EventArgs e)
-        {
-
-        }
+        
         public void btnInativar_Click(object sender, EventArgs e)
         {
+            bool algumSelecionado = false;
 
+            foreach(GridViewRow row in gridNivel.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkSelecionado");
+                if(chk != null && chk.Checked)
+                {
+                    int id = Convert.ToInt32(gridNivel.DataKeys[row.RowIndex].Value);
+                    var nivel = _nivelDAL.CarregarNivel(id);
+
+                    txtNome.Text = nivel.Nome;
+                    ViewState["NivelId"] = nivel.Id;
+
+                    nivel.Ativo = false;
+                    nivel.DataAlteracao = DateTime.Now;
+                    nivel.UsuarioAlteracao = 1;
+
+                    _nivelDAL.SalvarNivel(nivel);
+                    algumSelecionado = true;
+
+                }
+            }
+
+            if (algumSelecionado)
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "usuarioInativado",
+                    "mostrarAlerta('Usuario Inativado com sucesso', 'sucesso');",
+                    true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "usuarioInativado",
+                    "mostrarAlerta('Nenhum usuário selecionado', 'warning');",
+                    true);
+            }
+
+            txtNome.Text = string.Empty;
+            ViewState["NivelId"] = null;
+            carregarNivel();
+        }
+
+        public void abrirModalEdicao(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Editar")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+
+                var nivel = _nivelDAL.CarregarNivel(id);
+
+                txtNomeModal.Text = nivel.Nome;
+
+                ViewState["NivelId"] = id;
+
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "abrirModal",
+                    "$('#modalNivel').modal('show');",
+                    true);
+            };
+        }
+
+        public bool ValidarNivel(out string mensagemErro, int? idAtual)
+        {
+            mensagemErro = string.Empty;
+
+            if (string.IsNullOrEmpty(txtNomeModal.Text))
+            {
+                mensagemErro = "Nome do perfil é obrigatório!";
+                return false;
+            }
+
+            if(_nivelDAL.NivelDuplicado(txtNomeModal.Text.Trim(), idAtual))
+            {
+                mensagemErro = "Nível já cadastrado!";
+                return false;
+            }
+
+            return true;
         }
 
         private void carregarNivel()

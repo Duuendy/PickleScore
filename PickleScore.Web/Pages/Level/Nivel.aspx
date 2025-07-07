@@ -12,12 +12,11 @@
     <div style="display:flex; gap:10px">
         <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
         <asp:Button ID="btnInativar" runat="server" Text="Inativar"  OnClick="btnInativar_Click" CssClass="btn btn-primary" />
-        <%--<asp:Label ID="lblMensagem" runat="server" Text=""></asp:Label>--%>
         <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Level/NivelInativado.aspx" CssClass="btn btn-secondary" />
     </div>
     <hr />
 
-    <asp:GridView ID="gridNivel" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table">
+    <asp:GridView ID="gridNivel" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModalEdicao">
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>
@@ -29,19 +28,22 @@
             <asp:BoundField DataField="DataAlteracao" HeaderText="Data de Alteração" />           
             <asp:TemplateField HeaderText="Editar">
                 <ItemTemplate>
-                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-sm btn-secondary" />
+                    <asp:LinkButton ID="btnEditar" runat="server" Text="Editar"
+    CommandName="Editar"
+    CommandArgument='<%# Eval("Id") %>'
+    CssClass="btn btn-secondary" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
     
     <!--Modal-->
-    <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modalNivel" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Cadastrar Usuário</h5>
+                    <h5 class="modal-title">Editar Nível</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -66,10 +68,8 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#btnNovoUsuario').click(function () {
-                $('#modalUsuario').modal('show');
-            });
+        $('#btnEditar').click(function () {
+            $('#modalNivel').modal('show');
         });
     </script>
     
