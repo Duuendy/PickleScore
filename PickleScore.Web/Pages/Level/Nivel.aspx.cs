@@ -25,69 +25,52 @@ namespace PickleScore.Web.Pages.Level
             int? idNivel = ViewState["NivelId"] != null
                 ? Convert.ToInt32(ViewState["NivelId"]) : (int?)null;
 
-            if (!idNivel.HasValue || idNivel.Value == 0)
+            string nome = !string.IsNullOrWhiteSpace(txtNomeModal.Text)
+                ? txtNomeModal.Text.Trim()
+                : txtNome.Text.Trim();
+
+            if (!ValidarNivel(nome, out string mensagem, idNivel))
             {
-                if (!ValidarNivel(out string mensagem, idNivel))
-                {
-                    ScriptManager.RegisterStartupScript(
-                        this,
-                        GetType(),
-                        "alertaValidacao",
-                        $"mostrarAlerta('{mensagem}', 'warning');",
-                        true);
-                    return;
-                }
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "alertaValidacao",
+                    $"mostrarAlerta('{mensagem}', 'warning');",
+                    true);
+                return;
+            }
 
-                string nivel = txtNome.Text.Trim();
+            var nivelModel = new Models.Nivel
+            {
+                Id = idNivel ?? 0,
+                Nome = nome,
+                Ativo = true
+            };
 
-                var novoNivel = new Models.Nivel
-                {
-                    Id = idNivel ?? 0,
-                    Nome = nivel,
-                    Ativo = true,
-                    DataInsercao = DateTime.Now,
-                    UsuarioInsercao = 1,
-                };
-
-                _nivelDAL.SalvarNivel(novoNivel);
+            if (!idNivel.HasValue || idNivel == 0)
+            {
+                nivelModel.DataInsercao = DateTime.Now;
+                nivelModel.UsuarioInsercao = 1;
             }
             else
             {
-                string nomeNivelEditado = txtNomeModal.Text.Trim();
-                if (!ValidarNivel(out string mensagem, idNivel))
-                {
-                    ScriptManager.RegisterStartupScript(
-                        this,
-                        GetType(),
-                        "alertaValidacao",
-                        $"mostrarAlerta('{mensagem}', 'warning');",
-                        true);
-                    return;
-                }
-
-                var nivelEditado = new Models.Nivel
-                {
-                    Id = idNivel ?? 0,
-                    Nome = nomeNivelEditado,
-                    Ativo = true,
-                    DataAlteracao = DateTime.Now,
-                    UsuarioAlteracao = 1,
-                };
-
-                _nivelDAL.SalvarNivel(nivelEditado);
+                nivelModel.DataAlteracao = DateTime.Now;
+                nivelModel.UsuarioAlteracao = 1;
             }
 
-            ViewState["NivelId"] = null;
+            _nivelDAL.SalvarNivel(nivelModel);
 
+            ViewState["NIvelId"] = null;
+            txtNome.Text = string.Empty;
+            carregarNivel();
+
+            string tipoMensagem = idNivel.HasValue ? "Editado com sucesso!" : "Cadastrado com sucesso!";
             ScriptManager.RegisterStartupScript(
                 this,
                 GetType(),
                 "alertaSucesso",
-                "mostrarAlerta('Cadastrado com Sucesso!', 'sucesso');",
+                $"mostrarAlerta('{tipoMensagem}', 'sucesso');",
                 true);
-
-            txtNome.Text = string.Empty;
-            carregarNivel();
         }
         
         public void btnInativar_Click(object sender, EventArgs e)
@@ -160,11 +143,11 @@ namespace PickleScore.Web.Pages.Level
             };
         }
 
-        public bool ValidarNivel(out string mensagemErro, int? idAtual)
+        public bool ValidarNivel(string nome, out string mensagemErro, int? idAtual)
         {
             mensagemErro = string.Empty;
 
-            if (string.IsNullOrEmpty(txtNomeModal.Text))
+            if (string.IsNullOrEmpty(nome))
             {
                 mensagemErro = "Nome do perfil é obrigatório!";
                 return false;

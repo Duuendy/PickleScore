@@ -26,8 +26,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (faixaEtaria.Id == 0)
                 {
-                    string query = @"INSERT INTO faixaetaria (Nome, DataInsercao, DataAlteracao) 
-                                  VALUES (@Nome, @DataInsercao, @DataAlteracao)";
+                    string query = @"INSERT INTO faixaetaria (Nome, DataInsercao, DataAlteracao, UsuarioInsercao, UsuarioAlteracao) 
+                                  VALUES (@Nome, @DataInsercao, @DataAlteracao, @UsuarioInsercao, @UsuarioAlteracao)";
                     faixaEtaria.DataInsercao = DateTime.Now;
                     faixaEtaria.DataAlteracao = DateTime.Now;
                     connection.Execute(query, faixaEtaria);
@@ -76,6 +76,24 @@ namespace PickleScore.Web.DAL
             {
                 string query = @"SELECT * FROM faixaetaria";
                 return connection.Query<FaixaEtaria>(query).ToList();
+            }
+        }
+
+        public bool FaixaEtariaDuplicada(string nome, int? idAtual = null)
+        {
+            using(IDbConnection connection = new MySqlConnection(_connectionString))
+            {
+                string nomeNormalizado = nome.ToLowerInvariant().Trim();
+
+                string query = @"SELECT COUNT(*) FROM faixaetaria WHERE LOWER(Nome) = @nome AND Ativo = 1";
+
+                if (idAtual.HasValue)
+                {
+                    query += " AND Id <> @idAtual";
+                }
+
+                int count = connection.ExecuteScalar<int>(query, new {nome = nomeNormalizado, idAtual});
+                return count > 0;
             }
         }
     }
