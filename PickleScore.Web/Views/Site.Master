@@ -63,6 +63,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Category/Categoria.aspx">Categoria</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Level/Nivel.aspx">Nível</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/AgeRange/FaixaEtaria.aspx">Faixa Etária</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Pages/Payment/FormaPagamento.aspx">Forma Pagamento</a></li>
                     </ul>
                 </div>
             </div>

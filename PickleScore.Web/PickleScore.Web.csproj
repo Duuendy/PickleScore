@@ -181,6 +181,8 @@
     <Content Include="Pages\Category\CategoriaInativo.aspx" />
     <Content Include="Pages\Level\Nivel.aspx" />
     <Content Include="Pages\Level\NivelInativado.aspx" />
+    <Content Include="Pages\Payment\FormaPagamento.aspx" />
+    <Content Include="Pages\Payment\FormaPagamentoInativo.aspx" />
     <Content Include="Pages\Profile\Perfil.aspx" />
     <Content Include="Pages\Profile\PerfilInativo.aspx" />
     <Content Include="Pages\User\Usuario.aspx" />
@@ -291,6 +293,20 @@
     </Compile>
     <Compile Include="Pages\Level\NivelInativado.aspx.designer.cs">
       <DependentUpon>NivelInativado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Payment\FormaPagamento.aspx.cs">
+      <DependentUpon>FormaPagamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Payment\FormaPagamento.aspx.designer.cs">
+      <DependentUpon>FormaPagamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Payment\FormaPagamentoInativo.aspx.cs">
+      <DependentUpon>FormaPagamentoInativo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Payment\FormaPagamentoInativo.aspx.designer.cs">
+      <DependentUpon>FormaPagamentoInativo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Profile\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

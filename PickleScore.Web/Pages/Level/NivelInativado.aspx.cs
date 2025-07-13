@@ -31,7 +31,7 @@ namespace PickleScore.Web.Pages.Level
             gridNivelInativo.DataBind();
         }
 
-        public void btnAtivar_Click(object sender, EventArgs e)
+        public void btnAtivar_Click(object sender, EventArgs e) 
         {
             bool algumSelecionado = false;
 

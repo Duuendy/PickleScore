@@ -26,8 +26,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (faixaEtaria.Id == 0)
                 {
-                    string query = @"INSERT INTO faixaetaria (Nome, DataInsercao, DataAlteracao, UsuarioInsercao, UsuarioAlteracao) 
-                                  VALUES (@Nome, @DataInsercao, @DataAlteracao, @UsuarioInsercao, @UsuarioAlteracao)";
+                    string query = @"INSERT INTO faixaetaria (Nome, Ativo, DataInsercao, DataAlteracao, UsuarioInsercao, UsuarioAlteracao) 
+                                  VALUES (@Nome, @Ativo, @DataInsercao, @DataAlteracao, @UsuarioInsercao, @UsuarioAlteracao)";
                     faixaEtaria.DataInsercao = DateTime.Now;
                     faixaEtaria.DataAlteracao = DateTime.Now;
                     connection.Execute(query, faixaEtaria);
@@ -55,6 +55,7 @@ namespace PickleScore.Web.DAL
                 faixaEtaria.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE faixaetaria 
                                   SET Nome = @Nome, 
+                                  Ativo = @Ativo,
                                   DataAlteracao = @DataAlteracao 
                                   WHERE Id = @Id";
                 connection.Execute(query, faixaEtaria);

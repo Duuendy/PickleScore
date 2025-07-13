@@ -166,7 +166,7 @@ namespace PickleScore.Web.Pages.AgeRange
                 return false;
             }
 
-            if(_faixaEtariaDAL.FaixaEtariaDuplicada(txtNomeModal.Text.Trim(), idAtual))
+            if(_faixaEtariaDAL.FaixaEtariaDuplicada(nome, idAtual))
             {
                 mensagemErro = "Faixa Etária já existe";
                 return false;

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PickleScore.Web.Pages.AgeRange
+namespace PickleScore.Web.Pages.Payment
 {
 
 
-    public partial class FaixaEtariaInativa
+    public partial class FormaPagamentoInativo
     {
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace PickleScore.Web.Pages.AgeRange
         protected global::System.Web.UI.WebControls.Button btnVoltar;
 
         /// <summary>
-        /// gridFaixaEtariaInativo control.
+        /// gridFormaPagamentoInativo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridFaixaEtariaInativo;
+        protected global::System.Web.UI.WebControls.GridView gridFormaPagamentoInativo;
     }
 }
