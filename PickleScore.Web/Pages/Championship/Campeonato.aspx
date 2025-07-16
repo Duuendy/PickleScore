@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FormaPagamento.aspx.cs" Inherits="PickleScore.Web.Pages.Payment.FormaPagamento" MasterPageFile="~/Views/Site.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Campeonato.aspx.cs" Inherits="PickleScore.Web.Pages.Championship.Campeonato" MasterPageFile="~/Views/Site.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Cadastro Forma de Pagamento</h2>
+    <h2>Cadastro de Campeonato</h2>
     <hr />
 
-    <asp:Label ID="lblNome" runat="server" Text="Forma De Pagamento"></asp:Label>
+    <asp:Label ID="lblNome" runat="server" Text="Nome Do Campeonato"></asp:Label>
     <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>
     <hr />
 
@@ -16,7 +16,7 @@
     </div>
     <hr />
 
-    <asp:GridView ID="gridFormaPagamento" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModalEdicao">
+    <asp:GridView ID="gridCampeonato" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModalEdicao">
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>
@@ -24,21 +24,24 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="Nome" HeaderText="Nome" />
+            <asp:BoundField DataField="Local" HeaderText="Local" />
+            <asp:BoundField DataField="DataInicio" HeaderText="Data Inicio" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
+            <asp:BoundField DataField="DataFim" HeaderText="Data Fim" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
             <asp:TemplateField HeaderText="Editar">
                 <ItemTemplate>
-                    <asp:LinkButton ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-secondary" />
+                    <asp:LinkButton ID="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-secondary"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
 
     <!--Modal-->
-    <div class="modal fade" id="modalFormaPagamento" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modalCampeonato" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Editar Forma De Pagamento</h5>
+                    <h5 class="modal-title">Editar Campeonato</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -49,7 +52,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <asp:Button ID="btnSalvarFormaPag" runat="server" Text="Salvar" OnClientClick="btnSalvar_Click" CssClass="btn-secondary"/>
+                    <asp:Button ID="btnSalvarCampeonato" runat="server" Text="Salvar" OnClientClick="btnSalvar_Click" CssClass="btn btn-secondary"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -64,7 +67,7 @@
 
     <script>
         $('#btnEditar').click(function () {
-            $('#modalFormaPagamento').modal("show");
+            $('#modalCampeonato').modal("show");
         });
     </script>
 </asp:Content>

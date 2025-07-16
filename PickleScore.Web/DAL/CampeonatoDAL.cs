@@ -25,8 +25,8 @@ namespace PickleScore.Web.DAL
                 connection.Open();
                 if (campeonato.Id == 0)
                 {
-                    string query = @"INSERT INTO campeonato (Nome, Local, DataInicio, DataFim, DataInsercao, DataAlteracao) 
-                                    VALUES (@Nome, @Local, @DataInicio, @DataFim, @DataInsercao, @DataAlteracao)";
+                    string query = @"INSERT INTO campeonato (Nome, Local, Ativo, DataInicio, DataFim, DataInsercao, UsuarioInsercao, DataAlteracao, UsuarioAlteracao) 
+                                    VALUES (@Nome, @Local, @Ativo, @DataInicio, @DataFim, @DataInsercao, @UsuarioInsercao, @DataAlteracao, @UsuarioAlteracao)";
                     campeonato.DataInsercao = DateTime.Now;
                     campeonato.DataAlteracao = DateTime.Now;
                     connection.Execute(query, campeonato);
@@ -54,10 +54,12 @@ namespace PickleScore.Web.DAL
                 campeonato.DataAlteracao = DateTime.Now;
                 string query = @"UPDATE campeonato 
                                 SET Nome = @Nome,  
-                                Local = @Local, 
+                                Local = @Local,
+                                Ativo = @Ativo,
                                 DataInicio = @DataInicio, 
                                 DataFim = @DataFim, 
-                                DataAlteracao = @DataAlteracao 
+                                DataAlteracao = @DataAlteracao,
+                                UsuarioAlteracao = @UsuarioAlteracao
                                 WHERE Id = @Id";
                 campeonato.DataAlteracao = DateTime.Now;
                 connection.Execute(query, campeonato);

@@ -179,6 +179,7 @@
     <Content Include="Pages\AgeRange\FaixaEtariaInativa.aspx" />
     <Content Include="Pages\Category\Categoria.aspx" />
     <Content Include="Pages\Category\CategoriaInativo.aspx" />
+    <Content Include="Pages\Championship\Campeonato.aspx" />
     <Content Include="Pages\Level\Nivel.aspx" />
     <Content Include="Pages\Level\NivelInativado.aspx" />
     <Content Include="Pages\Payment\FormaPagamento.aspx" />
@@ -279,6 +280,13 @@
     </Compile>
     <Compile Include="Pages\Category\CategoriaInativo.aspx.designer.cs">
       <DependentUpon>CategoriaInativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Championship\Campeonato.aspx.cs">
+      <DependentUpon>Campeonato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Championship\Campeonato.aspx.designer.cs">
+      <DependentUpon>Campeonato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Level\Nivel.aspx.cs">
       <DependentUpon>Nivel.aspx</DependentUpon>
