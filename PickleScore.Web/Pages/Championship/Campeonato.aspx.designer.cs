@@ -15,13 +15,13 @@ namespace PickleScore.Web.Pages.Championship
     {
 
         /// <summary>
-        /// lblNome control.
+        /// gridCampeonato control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNome;
+        protected global::System.Web.UI.WebControls.GridView gridCampeonato;
 
         /// <summary>
         /// txtNome control.
@@ -33,49 +33,31 @@ namespace PickleScore.Web.Pages.Championship
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// btnSalvar control.
+        /// txtLocal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        protected global::System.Web.UI.WebControls.TextBox txtLocal;
 
         /// <summary>
-        /// btnInativar control.
+        /// txtDataInicio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInativar;
+        protected global::System.Web.UI.WebControls.TextBox txtDataInicio;
 
         /// <summary>
-        /// btnAtivar control.
+        /// txtDataFim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAtivar;
-
-        /// <summary>
-        /// gridCampeonato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridCampeonato;
-
-        /// <summary>
-        /// txtNomeModal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNomeModal;
+        protected global::System.Web.UI.WebControls.TextBox txtDataFim;
 
         /// <summary>
         /// btnSalvarCampeonato control.

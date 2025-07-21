@@ -5,18 +5,12 @@
     <h2>Cadastro de Campeonato</h2>
     <hr />
 
-    <asp:Label ID="lblNome" runat="server" Text="Nome Do Campeonato"></asp:Label>
-    <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" Width="300px"></asp:TextBox>
-    <hr />
-
-    <div style="display:flex; gap:10px">
-        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-primary" />
-        <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
-        <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/Payment/FormaPagamentoInativo.aspx" CssClass="btn btn-secondary" />
+    <div style="display:flex; gap: 8px">
+        <button id="btnNovoCampeonato" type="button" Class="btn btn-primary">Novo Campeonato</button>
     </div>
     <hr />
 
-    <asp:GridView ID="gridCampeonato" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModalEdicao">
+    <asp:GridView ID="gridCampeonato" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModal">
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>
@@ -48,11 +42,14 @@
                 </div>
 
                 <div class="modal-body">
-                    <asp:TextBox ID="txtNomeModal" placeholder="Nome" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtNome" placeholder="Nome" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtLocal" placeholder="Local" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtDataInicio" placeholder="Data Início" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtDataFim" placeholder="Data Fim" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-footer">
-                    <asp:Button ID="btnSalvarCampeonato" runat="server" Text="Salvar" OnClientClick="btnSalvar_Click" CssClass="btn btn-secondary"/>
+                    <asp:Button ID="btnSalvarCampeonato" runat="server" Text="Salvar" OnClick="btnSalvar_Click" CssClass="btn btn-secondary"/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -66,8 +63,10 @@
     </div>
 
     <script>
-        $('#btnEditar').click(function () {
-            $('#modalCampeonato').modal("show");
+        $(document).ready(function () {
+            $('#btnNovoCampeonato').click(function () {
+                $('#modalCampeonato').modal('show');
+            });
         });
     </script>
 </asp:Content>

@@ -3,15 +3,16 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Cadastro de Usuário</h2>
+    <hr />
+
     <div style="display:flex; gap: 8px">
         <button id="btnNovoUsuario" type="button" Class="btn btn-primary">Novo Usuário</button>
         <asp:Button ID="btnInativar" runat="server" Text="Inativar" OnClick="btnInativar_Click" CssClass="btn btn-primary" />
         <asp:Button ID="btnAtivar" runat="server" Text="Ativar" PostBackUrl="~/Pages/User/UsuarioInativo.aspx" CssClass="btn btn-primary" />
     </div>
-    
     <hr />
     
-    <asp:GridView ID="gridUsuario" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" OnRowCommand="gridUsuario_RowCommand">
+    <asp:GridView ID="gridUsuario" runat="server" DataKeyNames="Id" AutoGenerateColumns="false" CssClass="table" OnRowCommand="abrirModal">
         <Columns>
             <asp:TemplateField HeaderText="Selecionar">
                 <ItemTemplate>

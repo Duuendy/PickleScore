@@ -211,7 +211,7 @@ namespace PickleScore.Web.Pages.User
             return true;
         }
 
-        public void gridUsuario_RowCommand(object sender, GridViewCommandEventArgs e)
+        public void abrirModal(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Editar")
             {
@@ -223,13 +223,17 @@ namespace PickleScore.Web.Pages.User
                 txtSobrenome.Text = usuario.Sobrenome;
                 txtEmail.Text = usuario.Email;
                 txtCpf.Text = usuario.Cpf;
-                txtNascimento.Text = usuario.Nascimento.ToString("yyyy-MM-dd");
+                txtNascimento.Text = usuario.Nascimento.ToString("dd-MM-yyyy");
                 ddlPerfil.SelectedValue = usuario.PerfilId.ToString();
 
                 ViewState["UsuarioId"] = id;
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModal", "$('#modalUsuario').modal('show');", true);
-
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "abrirModal",
+                    "$('#modalUsuario').modal('show');",
+                    true);
             };
         }
 
@@ -256,6 +260,5 @@ namespace PickleScore.Web.Pages.User
             gridUsuario.DataSource = usuarioAtivo;
             gridUsuario.DataBind();
         }
-
     }
 }
