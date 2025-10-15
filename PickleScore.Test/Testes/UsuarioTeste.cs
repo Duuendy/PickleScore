@@ -2,7 +2,7 @@
 using System;
 using BCrypt.Net;
 using BCryptNet = BCrypt.Net.BCrypt;
-using PickleScore.Web.DAL;
+using PickleScore.Lib;
 using PickleScore.Web.Compatilhado;
 
 namespace PickleScore.Test

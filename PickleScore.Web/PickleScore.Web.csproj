@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\imagens\login-img.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
@@ -182,10 +183,13 @@
     <Content Include="Pages\Championship\Campeonato.aspx" />
     <Content Include="Pages\Level\Nivel.aspx" />
     <Content Include="Pages\Level\NivelInativado.aspx" />
+    <Content Include="Pages\Login\Login.aspx" />
     <Content Include="Pages\Payment\FormaPagamento.aspx" />
     <Content Include="Pages\Payment\FormaPagamentoInativo.aspx" />
     <Content Include="Pages\Profile\Perfil.aspx" />
     <Content Include="Pages\Profile\PerfilInativo.aspx" />
+    <Content Include="Pages\Registration\Inscricao.aspx" />
+    <Content Include="Pages\User\NovoUsuario.aspx" />
     <Content Include="Pages\User\Usuario.aspx" />
     <Content Include="Pages\User\UsuarioInativo.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -243,15 +247,13 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Utils\Scripts\Alerta.js" />
+    <Content Include="JS\Scripts\Alerta.js" />
     <Content Include="Views\Site.Master" />
     <Content Include="Web.config" />
     <Content Include="App_Start\Bundle.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="DAL\FormaPagamentoDAL.cs" />
-    <Compile Include="Models\FormaPagamento.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Pages\AgeRange\FaixaEtaria.aspx.cs">
       <DependentUpon>FaixaEtaria.aspx</DependentUpon>
@@ -302,6 +304,13 @@
     <Compile Include="Pages\Level\NivelInativado.aspx.designer.cs">
       <DependentUpon>NivelInativado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Payment\FormaPagamento.aspx.cs">
       <DependentUpon>FormaPagamento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -330,6 +339,20 @@
     <Compile Include="Pages\Profile\PerfilInativo.aspx.designer.cs">
       <DependentUpon>PerfilInativo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Registration\Inscricao.aspx.cs">
+      <DependentUpon>Inscricao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Registration\Inscricao.aspx.designer.cs">
+      <DependentUpon>Inscricao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\NovoUsuario.aspx.cs">
+      <DependentUpon>NovoUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\NovoUsuario.aspx.designer.cs">
+      <DependentUpon>NovoUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\User\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -344,27 +367,17 @@
     <Compile Include="Pages\User\UsuarioInativo.aspx.designer.cs">
       <DependentUpon>UsuarioInativo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Criptografia.cs" />
-    <Compile Include="DAL\CampeonatoDAL.cs" />
-    <Compile Include="DAL\CategoriaDAL.cs" />
-    <Compile Include="DAL\Connection.cs" />
-    <Compile Include="DAL\FaixaEtariaDAL.cs" />
-    <Compile Include="DAL\InscricaoDAL.cs" />
-    <Compile Include="DAL\NivelDAL.cs" />
-    <Compile Include="DAL\PerfilDAL.cs" />
-    <Compile Include="DAL\UsuarioDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Utils\IEnumerableu.cs" />
-    <Compile Include="Models\Campeonato.cs" />
-    <Compile Include="Models\Categoria.cs" />
-    <Compile Include="Models\FaixaEtaria.cs" />
-    <Compile Include="Models\Inscricao.cs" />
-    <Compile Include="Models\Nivel.cs" />
-    <Compile Include="Models\Perfil.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
     <Compile Include="Views\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -380,12 +393,19 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Views\Login.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PickleScore.Lib\PickleScore.Lib.csproj">
+      <Project>{af4bc806-a0ce-44b5-98e2-e9177a17134a}</Project>
+      <Name>PickleScore.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

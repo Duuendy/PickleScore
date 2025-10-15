@@ -134,6 +134,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PickleScore.Lib\PickleScore.Lib.csproj">
+      <Project>{af4bc806-a0ce-44b5-98e2-e9177a17134a}</Project>
+      <Name>PickleScore.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PickleScore.Web\PickleScore.Web.csproj">
       <Project>{a2045f79-d124-4a62-aed3-634c2679b575}</Project>
       <Name>PickleScore.Web</Name>

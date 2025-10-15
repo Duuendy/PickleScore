@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
     <script src="/Utils/Scripts/Alerta.js"></script>
 </head>
 <body>
@@ -31,10 +33,6 @@
                         onclick="ocultarAlerta()"
                         style="position: absolute; top: 0.75rem; right: 1rem;">&times;</button>
             </div>
-        <%--<div id="divMensagem" class="alert">
-            <button type="button" class="close" onclick="ocultarAlerta()">&times;</button>
-            <span id="lblMensagemTexto" class="d-inline-block w-100 fs-6 fw-semibold"></span>
-        </div>--%>
 
         <asp:ScriptManager runat="server">
             <Scripts>

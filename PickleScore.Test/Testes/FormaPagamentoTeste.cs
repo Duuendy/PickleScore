@@ -16,7 +16,7 @@ namespace PickleScore.Test
                 DataInsercao = DateTime.Now,
                 DataAlteracao = DateTime.Now
             };
-            formaPagamentoDAL.CadastrarFormaPagamento(formaPagamento);
+            formaPagamentoDAL.SalvarFormaPagamento(formaPagamento);
             Assert.IsTrue(formaPagamento.Id == 0, "A forma de pagamento não foi salva corretamente.");
             Assert.AreEqual("PIX", formaPagamento.Nome, "O nome da forma de pagamento não foi salvo corretamente.");
         }
